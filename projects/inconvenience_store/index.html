@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>OPEN 24/7-ish — Fun Stuffs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/theme.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                        danger: '#ef4444',
+                        misery: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .dot-grid {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        * { scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
+
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+
+        /* Chatbot slide-in */
+        .chat-slide { animation: chatSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes chatSlide {
+            from { transform: translateY(100%) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        /* Evade button */
+        #checkout-btn { transition: all 0.08s ease-out; }
+
+        /* CAPTCHA grid shake */
+        .captcha-shake { animation: cShake 0.3s ease-out; }
+        @keyframes cShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .typing-dot { animation: blink 1.2s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0.2; }
+            40% { opacity: 1; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dot-grid min-h-screen text-slate-900 font-sans selection:bg-brand/20 flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 z-50 sticky top-0">
+        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a class="text-brand font-bold text-xl tracking-tight" href="../../index.html">TonyWong<span
+                        class="text-slate-400 font-medium">0086</span></a>
+                <div class="h-6 w-px bg-slate-200 mx-2"></div>
+                <span class="text-sm font-semibold text-slate-500">The Inconvenience Store</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <button id="cart-toggle"
+                    class="relative p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.349-1.862l1.683-7.088H6.106" />
+                    </svg>
+                    <span id="cart-count"
+                        class="absolute -top-1 -right-1 bg-danger text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+                <a class="text-sm font-medium text-slate-500 hover:text-brand" href="../../index.html">Back to Hub</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="max-w-7xl mx-auto px-6 pt-16 pb-10 text-center">
+        <div class="mb-8 w-20 h-20 bg-amber-50 rounded-3xl flex items-center justify-center text-amber-500 shadow-sm mx-auto">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.15c0 .415.336.75.75.75z" />
+            </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">OPEN 24/7-ish</h1>
+        <p class="text-slate-500 max-w-xl mx-auto leading-relaxed">Premium products meticulously
+            engineered to ruin your day in small, unforgettable ways.</p>
+    </section>
+
+    <!-- Product Grid -->
+    <main class="max-w-7xl mx-auto px-6 pb-16">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Products injected by JS -->
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[80] hidden"></div>
+    <aside id="cart-sidebar"
+        class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[90] translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-xl font-bold">Your Cart of Regret</h2>
+            <button id="cart-close" class="p-2 hover:bg-slate-100 rounded-xl text-slate-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p id="cart-empty" class="text-slate-400 text-center py-12">Your cart is blissfully empty. For now.</p>
+        </div>
+        <div class="p-6 border-t border-slate-100 space-y-4">
+            <div class="flex justify-between text-lg font-bold">
+                <span>Total Misery</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <div class="relative overflow-hidden rounded-2xl" id="checkout-zone">
+                <button id="checkout-btn"
+                    class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all">
+                    Complete Purchase
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- CAPTCHA Modal -->
+    <div id="captcha-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6 hidden">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Security Verification</p>
+            <h3 class="text-xl font-bold mb-2">Select all images containing</h3>
+            <p class="text-brand font-extrabold text-2xl mb-6" id="captcha-prompt">a sense of impending doom</p>
+            <div id="captcha-grid" class="grid grid-cols-3 gap-2 mb-6">
+                <!-- 9 cells injected by JS -->
+            </div>
+            <button id="captcha-verify"
+                class="w-full bg-brand text-white py-3 rounded-xl font-bold hover:brightness-110 transition-all">Verify</button>
+            <p id="captcha-error" class="text-danger text-xs mt-3 hidden font-medium">Incorrect. A sense of impending doom was clearly present in all images.</p>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-bubble"
+        class="fixed bottom-6 right-6 z-[70] w-14 h-14 bg-brand rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 20.25V4.5A2.25 2.25 0 016 2.25h12A2.25 2.25 0 0120.25 4.5v11.25A2.25 2.25 0 0118 17.997H8.572L3.75 20.25z" />
+        </svg>
+    </div>
+
+    <!-- Chatbot Panel -->
+    <div id="chatbot-panel"
+        class="fixed bottom-24 right-6 z-[70] w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden hidden">
+        <div class="bg-brand text-white p-4 flex items-center justify-between">
+            <div>
+                <p class="font-bold text-sm">Customer "Service"</p>
+                <p class="text-[10px] opacity-70">Avg. response time: Instant (unfortunately)</p>
+            </div>
+            <button id="chatbot-close" class="p-1 hover:bg-white/20 rounded-lg">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 space-y-3 overflow-y-auto max-h-72">
+            <div class="flex gap-2 items-start">
+                <div class="w-7 h-7 rounded-full bg-brand flex items-center justify-center text-white text-[10px] font-bold shrink-0">CS</div>
+                <div class="bg-slate-100 rounded-xl rounded-tl-none px-4 py-2 text-sm text-slate-700 max-w-[80%]">
+                    Welcome to Customer "Service." How can I make your experience worse today?
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border-t border-slate-100 flex gap-2">
+            <input id="chat-input" type="text"
+                class="flex-1 border-slate-200 rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-brand focus:border-brand"
+                placeholder="Type your complaint...">
+            <button id="chat-send"
+                class="bg-brand text-white px-4 py-2 rounded-xl font-bold text-sm hover:brightness-110 transition-all">Send</button>
+        </div>
+    </div>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

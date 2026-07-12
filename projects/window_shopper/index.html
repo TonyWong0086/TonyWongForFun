@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Impossible Lots — Fun Stuffs</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/theme.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                        gold: { light: '#fef3c7', DEFAULT: '#f59e0b', dark: '#b45309' },
+                        obsidian: '#0a0a0a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .dot-grid {
+            background-color: #ffffff;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Hide scrollbars */
+        * { scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+
+        /* Cart slide-in */
+        .cart-panel { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cart-panel.open { transform: translateX(0); }
+
+        /* Receipt & tracker fade */
+        .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* Gold shimmer on price */
+        .price-tag {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Star rating */
+        .stars { color: #f59e0b; letter-spacing: 2px; }
+
+        /* Shipping tracker pulse */
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+        .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+        /* Hidden utility */
+        .hidden { display: none !important; }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dot-grid min-h-screen text-slate-900 font-sans selection:bg-brand/20">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="text-2xl font-bold tracking-tight">
+                <a class="hover:opacity-80 transition-opacity" href="../../index.html">
+                    FS <span class="text-brand">/ LOT OFFICE</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a class="text-sm font-medium text-slate-500 hover:text-brand transition-colors" href="../../index.html">← Back to Hub</a>
+                <button id="cart-toggle" class="relative bg-obsidian text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-slate-800 transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+                    Cart (<span id="cart-count">0</span>)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+
+        <!-- Hero -->
+        <header class="text-center mb-16 md:mb-24">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-amber-50 rounded-3xl mb-6 shadow-sm border border-amber-100 text-amber-500">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+                <span class="font-display italic">The Impossible Lots</span>
+            </h1>
+            <p class="text-2xl md:text-3xl font-bold price-tag mb-4">Private acquisitions for unlimited means</p>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto">
+                Browse impossible items. Pay with your unlimited fake black card.
+                <span class="block text-sm text-slate-400 mt-2 italic">Free interdimensional shipping on all orders.</span>
+            </p>
+        </header>
+
+        <!-- Product Grid -->
+        <section id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Products injected by JS -->
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-[60] hidden" onclick="toggleCart()"></div>
+    <aside id="cart-panel" class="cart-panel fixed top-0 right-0 h-full w-full max-w-md bg-white z-[70] shadow-2xl flex flex-col">
+        <div class="flex items-center justify-between p-6 border-b border-slate-100">
+            <h2 class="text-xl font-bold">Your Cart</h2>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-900 transition-colors text-2xl">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p id="cart-empty" class="text-center text-slate-400 py-12">Your cart is tragically empty.</p>
+        </div>
+        <div class="p-6 border-t border-slate-100 bg-slate-50">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Grand Total</span>
+                <span id="cart-total" class="text-2xl font-bold price-tag">$0</span>
+            </div>
+            <button id="checkout-btn" onclick="checkout()" class="w-full bg-obsidian text-white font-bold py-4 rounded-2xl hover:bg-brand transition-all text-lg shadow-lg disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+                Buy with Unlimited Black Card™
+            </button>
+        </div>
+    </aside>
+
+    <!-- Receipt / Shipping Tracker Modal -->
+    <div id="receipt-modal" class="modal-overlay fixed inset-0 z-[80] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <!-- Receipt Section -->
+            <div class="p-8 md:p-10 border-b border-dashed border-slate-200">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-50 flex items-center justify-center text-slate-400">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold">Unlimited Black Card™</h2>
+                    <p class="text-sm text-slate-400 uppercase tracking-widest mt-1">Official Transaction Receipt</p>
+                </div>
+                <div class="border-t border-b border-slate-100 py-4 mb-4 space-y-2" id="receipt-items">
+                    <!-- Receipt line items injected by JS -->
+                </div>
+                <div class="flex justify-between font-bold text-lg">
+                    <span>TOTAL</span>
+                    <span id="receipt-total" class="price-tag">$0</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-4 text-center">Card ending in ∞∞∞∞ • Approved by The Multiverse Banking Authority</p>
+                <p class="text-xs text-slate-500 mt-2 text-center font-semibold">Lifetime frivolous spend: <span id="lifetime-spend" class="price-tag">$0</span></p>
+            </div>
+
+            <!-- Shipping Tracker Section -->
+            <div class="p-8 md:p-10">
+                <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V15m0 0l-2.25-1.313M3 16.5v2.25M21 16.5v2.25M12 9l2.25-1.313M12 9v2.75M12 9L9.75 7.688"/></svg>
+                    Shipping Tracker <span class="text-xs font-normal text-slate-400">(Live)</span>
+                </h3>
+                <div id="shipping-steps" class="space-y-4">
+                    <!-- Shipping steps injected by JS -->
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-slate-100">
+                <button onclick="closeReceipt()" class="w-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-semibold py-3 rounded-xl transition-all">
+                    Continue Shopping (Obviously)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cookie Consent - TonyWong0086</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/theme.css">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { 
+            background: #fff;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .site-preview {
+            filter: blur(8px);
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .cookie-modal {
+            background: white;
+            width: 100%;
+            max-width: 540px;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .accept-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.05s linear, width 0.1s, height 0.1s, font-size 0.1s;
+            cursor: pointer;
+            border: none;
+            position: absolute; /* Replaced with JS positioning if needed, but keeping for evasion logic */
+            white-space: nowrap;
+        }
+
+        .decline-btn {
+            background-color: #f3f4f6;
+            color: #9ca3af;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: not-allowed;
+            border: 1px solid #e5e7eb;
+        }
+
+        .cookie-icon {
+            color: #d97706;
+            margin-bottom: 20px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .shake { animation: shake 0.2s infinite; }
+    </style>
+</head>
+
+<body>
+    <!-- Fake Site Background -->
+    <div class="site-preview p-12 space-y-8">
+        <div class="h-8 w-24 bg-slate-200 rounded"></div>
+        <div class="grid grid-cols-3 gap-6">
+            <div class="h-48 bg-slate-100 rounded-xl"></div>
+            <div class="h-48 bg-slate-100 rounded-xl"></div>
+            <div class="h-48 bg-slate-100 rounded-xl"></div>
+        </div>
+        <div class="h-4 w-full bg-slate-50 rounded"></div>
+        <div class="h-4 w-3/4 bg-slate-50 rounded"></div>
+        <div class="h-4 w-1/2 bg-slate-50 rounded"></div>
+    </div>
+
+    <!-- The Trap -->
+    <div class="modal-overlay">
+        <div class="cookie-modal">
+            <div class="cookie-icon">
+                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-1-12.4c.5-.1 1-.1 1.5 0 .4.1.8.3 1 .6l.9 1c.2.2.4.4.7.5.3.1.5.1.8 0 .5-.1 1-.1 1.5.1s.8.4 1 .8l.5 1.2c.1.3.3.5.5.7l1.2.5c.4.2.7.5.8 1s.1 1-.1 1.5c-.1.3-.1.5 0 .8.1.3.3.5.5.7l1 .9c.3.2.5.6.6 1 .1.4-.1.9-.3 1.3l-.8.9c-.2.2-.3.4-.3.7-.1.3-.1.5 0 .8.1.4.1.9-.1 1.3-.2.4-.6.7-1 .8l-1.2.4c-.3.1-.5.3-.7.5l-.4 1.2c-.2.4-.5.7-1 .8s-.9.1-1.3-.1l-.9-.8c-.2-.2-.4-.3-.7-.3-.3-.1-.5-.1-.8 0l-1 .6c-.4.2-.9.3-1.3.1-.4-.2-.7-.6-.8-1l-.4-1.2c-.1-.3-.3-.5-.5-.7l-1.2-.4c-.4-.2-.7-.5-.8-1s-.1-1 .1-1.5l.8-.9c.2-.2.3-.4.3-.7.1-.3.1-.5 0-.8-.1-.4-.1-.9.1-1.3.2-.4.6-.7 1-.8l1.2-.4c.3-.1.5-.3.7-.5l.4-1.2c.2-.4.5-.7 1-.8s.9-.1 1.3.1l.9.8c.2.2.4.3.7.3z"/></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">We value your data (literally)</h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-8">
+                To provide you with the most invasive browsing experience possible, we and our 9,432 "partners" use cookies to track your eye movement, pulse rate, and that thing you did in 2014. By clicking "Accept All", you agree to let us store this information in a server located in an active volcano.
+            </p>
+            
+            <div class="flex items-center justify-start gap-4 h-12 relative" id="btn-container">
+                <button class="decline-btn" onclick="void(0)">Decline All</button>
+                <div id="accept-wrapper" class="inline-block">
+                    <button id="accept-btn" class="accept-btn">Accept All</button>
+                </div>
+            </div>
+
+            <p class="mt-8 text-[10px] text-slate-400">
+                You can manage your preferences, but let's be honest, you're not going to. <a href="#" class="underline">Privacy Policy</a>
+                <span id="evasion-note" class="block mt-2 text-slate-300"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Exit button -->
+    <a href="../../index.html" class="fixed top-8 left-8 text-xs text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest font-bold z-[200]">← Reject Cookies Locally</a>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

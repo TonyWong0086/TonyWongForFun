@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root { --case:#c8d0bc; --dark:#243526; --screen:#c7f59a; --warn:#ff5d3d; }
+body.dot-grid { background:#798578; background-image:radial-gradient(#617061 1px,transparent 1px); background-size:12px 12px; font-family:'IBM Plex Mono',monospace!important; color:var(--dark); }
+body > header { background:var(--dark)!important; border:0!important; color:#eef4df; }
+body > header nav { height:58px!important; }
+body > header a { color:#eef4df!important; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; }
+main { max-width:860px!important; background:var(--case); margin:60px auto!important; padding:38px!important; border:4px solid var(--dark); border-radius:24px 24px 38px 38px; box-shadow:inset 0 0 0 5px #e3e9d8, 18px 22px 0 rgba(24,35,25,.45); position:relative; }
+main::before { content:'FS INDUSTRIAL SYSTEMS · MODEL CJ-86 · DO NOT OPEN'; display:block; border-bottom:2px solid var(--dark); padding-bottom:14px; margin-bottom:24px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.12em; }
+main > header { text-align:left!important; margin-bottom:28px!important; }
+main > header > div { display:none!important; }
+main h1 { font:400 clamp(2.8rem,7vw,5rem)/.9 'Black Ops One',sans-serif!important; letter-spacing:-.03em!important; text-transform:uppercase; }
+main > header p { color:var(--dark)!important; font:600 13px 'IBM Plex Mono',monospace!important; text-transform:uppercase; }
+main > section, main > div:not(.fx-project-stamp) { border:3px solid var(--dark)!important; border-radius:8px!important; box-shadow:inset 0 0 0 4px rgba(36,53,38,.12)!important; background:#e6eadc!important; }
+#password-input { border:3px solid var(--dark)!important; border-radius:3px!important; background:var(--screen)!important; color:#152211!important; font:600 21px 'IBM Plex Mono',monospace!important; box-shadow:inset 0 4px 10px rgba(27,50,22,.22); }
+button { border-radius:3px!important; font-family:'IBM Plex Mono',monospace!important; text-transform:uppercase; }
+#strength-bar { border-radius:0!important; }
+#strength-label { font-family:'IBM Plex Mono',monospace!important; }
+@media(max-width:700px){main{margin:24px 12px!important;padding:25px 18px!important;border-radius:18px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

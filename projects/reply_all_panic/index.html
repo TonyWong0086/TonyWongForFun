@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Reply-All Incident Console — Fun Stuffs</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/theme.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                        outlook: '#0078d4',
+                        panic: '#ef4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .dot-grid {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Hide scrollbars */
+        * {
+            scrollbar-width: none;
+        }
+
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Frantic button movement */
+        #unsend-btn {
+            transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Notification slide-in */
+        .slack-notif {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Glitch/Panic effect */
+        .panic-mode {
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        /* Blurring effect for game intensity */
+        .distraction-blur {
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .timer-flash {
+            animation: flashRed 1s infinite;
+        }
+
+        @keyframes flashRed {
+
+            0%,
+            100% {
+                color: #f1f5f9;
+            }
+
+            50% {
+                color: #ef4444;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dot-grid min-h-screen text-slate-900 font-sans selection:bg-brand/20 flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b border-slate-200 z-50">
+        <nav class="max-w-full mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a class="text-brand font-bold text-xl tracking-tight" href="../../index.html">TonyWong<span
+                        class="text-slate-400 font-medium">Out-of-Office</span></a>
+                <div class="h-6 w-px bg-slate-200 mx-2"></div>
+                <span class="text-sm font-semibold text-slate-500">Mail Simulator v1.0</span>
+            </div>
+
+            <div class="flex-1 max-w-xl mx-8">
+                <div class="relative">
+                    <input type="text"
+                        class="w-full bg-slate-50 border-slate-200 h-9 rounded-md px-10 text-sm focus:ring-1 focus:ring-brand focus:border-brand"
+                        placeholder="Search for your missing dignity...">
+                    <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor"
+                        stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div id="game-timer"
+                    class="font-mono font-bold text-lg bg-slate-800 text-slate-100 px-4 py-1 rounded-full">30.00s</div>
+                <a class="text-sm font-medium text-slate-500 hover:text-brand" href="../../index.html">Exit Panic</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Simulator Layout -->
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-50 border-r border-slate-200 flex flex-col p-4 gap-2">
+            <button
+                class="w-full bg-outlook text-white rounded-md py-2.5 flex items-center justify-center gap-2 mb-4 font-semibold text-sm hover:shadow-lg transition-all"
+                onclick="location.reload()">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                New Message
+            </button>
+            <div class="space-y-1">
+                <div
+                    class="flex items-center justify-between px-3 py-2 text-sm text-slate-500 rounded-md hover:bg-slate-200 cursor-pointer">
+                    <span class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                        </svg> Inbox</span>
+                    <span class="bg-red-500 text-white text-[10px] px-1.5 rounded-full font-bold">99+</span>
+                </div>
+                <div
+                    class="flex items-center px-3 py-2 text-sm text-slate-900 border-l-4 border-outlook rounded-md bg-white shadow-sm font-semibold">
+                    <span class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg> Sent Items</span>
+                </div>
+                <div
+                    class="flex items-center px-3 py-2 text-sm text-slate-500 rounded-md hover:bg-slate-200 cursor-pointer">
+                    <span class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg> Deleted</span>
+                </div>
+            </div>
+
+            <div class="mt-auto p-4 bg-white rounded-xl border border-slate-200 shadow-sm animate-pulse">
+                <p class="text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-widest">IT Security Notice</p>
+                <p class="text-[11px] leading-tight text-slate-500">Please think twice before clicking 'Reply-All' on
+                    company-wide announcements. Your career depends on it.</p>
+            </div>
+        </aside>
+
+        <!-- Message View -->
+        <main class="flex-1 bg-white flex flex-col relative overflow-hidden" id="simulator-canvas">
+
+            <!-- Message Header -->
+            <div class="p-6 border-b border-slate-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold tracking-tight text-slate-800" id="msg-subject">SUBJECT: Thoughts on
+                        the Management Offsite <svg class="w-8 h-8 inline text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></h2>
+                    <div class="flex items-center gap-2">
+                        <button id="unsend-btn"
+                            class="bg-panic text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg hover:brightness-110 active:scale-95 transition-all hidden">
+                            UNSEND MESSAGE
+                        </button>
+                        <button class="p-2 hover:bg-slate-100 rounded-full text-slate-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-bold shadow-sm">
+                        Me</div>
+                    <div>
+                        <p class="text-sm"><strong>From:</strong> You</p>
+                        <p class="text-sm text-panic font-bold"><strong>To:</strong> GLOBAL_ALL_EMPLOYEES (10,482
+                            people)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Body -->
+            <div
+                class="p-8 flex-1 overflow-y-auto font-mono text-sm leading-relaxed text-slate-500 space-y-4 select-none">
+                <p>Hey everyone,</p>
+                <p>I just wanted to share my true thoughts about the management offsite yesterday. Honestly, the
+                    leadership team is so out of touch it's hilarious. Did anyone else notice Steve's PowerPoint? He
+                    spelled "strategy" wrong three times. <svg class="w-4 h-4 inline text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></p>
+                <p>Also, the budget cuts are obviously just to fund more "synergy" retreats that no one wants. Maybe if
+                    they spent less on artisanal bagels and more on... oh wait, everyone is on this thread? CRAP.</p>
+                <p>Wait, I didn't mean to—</p>
+            </div>
+
+            <!-- Fake Slack Notifications Area -->
+            <div id="fallout-notifications"
+                class="absolute bottom-6 right-6 w-80 flex flex-col gap-3 pointer-events-none">
+                <!-- Notifications injected here -->
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Start Modal -->
+    <div id="start-modal" class="fixed inset-0 z-[100] flex items-center justify-center modal-overlay p-6 active">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-200 text-center">
+            <div
+                class="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6 text-amber-500">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-extrabold mb-4 tracking-tight">The Fatal Reply-All</h2>
+            <p class="text-slate-500 mb-8 leading-relaxed">
+                You just accidentally sent your "real thoughts" about the CEO to the <span
+                    class="font-bold text-panic">entire company</span>.
+            </p>
+            <button id="start-game-btn"
+                class="w-full bg-outlook text-white py-4 rounded-2xl font-bold text-lg hover:shadow-outlook shadow-lg transition-all active:scale-95">
+                OH NO! SENDING...
+            </button>
+            <p class="mt-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">This is a simulation. Your
+                real job is (probably) safe.</p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="fixed inset-0 z-[101] flex items-center justify-center modal-overlay p-6 hidden">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border-4 border-panic text-center">
+            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 id="outcome-title" class="text-3xl font-extrabold mb-4 tracking-tight">GAME OVER</h2>
+            <p id="outcome-desc" class="text-slate-500 mb-8 leading-relaxed font-medium"></p>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-8 text-left">
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white font-bold">
+                        HR</div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 tracking-widest uppercase">New Meeting Invite</p>
+                        <p class="text-sm font-bold text-slate-900">Quick Chat about "Company Policy"</p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-xs text-slate-500 font-mono">
+                    <span>Today, 4:00 PM</span>
+                    <span class="text-panic font-bold">MANDATORY</span>
+                </div>
+            </div>
+
+            <button onclick="location.reload()"
+                class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all">
+                TRY NOT TO GET FIRED AGAIN
+            </button>
+        </div>
+    </div>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back data-dark></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

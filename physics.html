@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A draggable Matter.js playground disguised as a questionable gravity laboratory.">
+  <title>Gravity Testing Chamber — Fun Stuffs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+</head>
+<body>
+  <header class="lab-header">
+    <a class="lab-brand" href="index.html" aria-label="Back to Fun Stuffs">
+      <span class="brand-mark" aria-hidden="true">FS</span>
+      <span>Fun Stuffs</span>
+    </a>
+    <div class="experiment-id">
+      <span>Experiment</span>
+      <strong>G–0086</strong>
+    </div>
+  </header>
+
+  <main id="physics-container" aria-label="Interactive gravity testing chamber">
+    <div class="chamber-copy" aria-hidden="true">
+      <span>Drag specimens</span>
+      <strong>Gravity is<br>negotiable.</strong>
+    </div>
+
+    <aside class="telemetry" aria-label="Live chamber status">
+      <div class="status-light" aria-hidden="true"></div>
+      <div>
+        <span class="telemetry-label">Chamber status</span>
+        <strong id="gravity-status" aria-live="polite">Downward pull</strong>
+      </div>
+      <dl>
+        <div><dt>Gravity</dt><dd id="gravity-reading">+0.50 G</dd></div>
+        <div><dt>Specimens</dt><dd id="body-count">08</dd></div>
+        <div><dt>Disturbances</dt><dd id="event-count">00</dd></div>
+      </dl>
+    </aside>
+
+    <section class="control-deck" aria-label="Chamber controls">
+      <p><span class="control-dot"></span>Controls armed</p>
+      <div class="button-bank">
+        <button id="btn-shake" type="button"><span aria-hidden="true">↯</span> Agitate</button>
+        <button id="btn-gravity" class="primary-control" type="button"><span aria-hidden="true">⇅</span> Reverse gravity</button>
+        <button id="btn-reset" type="button"><span aria-hidden="true">↺</span> Restack</button>
+      </div>
+      <small>Tip: grab any specimen and throw it.</small>
+    </section>
+
+    <article class="physics-item title-card" id="elem-1">
+      <span class="specimen-label">Specimen 01 / Claim</span>
+      <h1>“Creative” web developer</h1>
+      <p>I instructed a machine to make this portfolio.</p>
+    </article>
+
+    <div class="physics-item pill" id="elem-2"><span>100% AI generated</span></div>
+    <div class="physics-item pill accent-pill" id="elem-3"><span>0 documented coding skills</span></div>
+
+    <div class="physics-item code-card" id="elem-4">
+      <span class="specimen-label">Specimen 04 / Evidence</span>
+      <code><i>const</i> madeByAI = <b>true</b>;</code>
+    </div>
+
+    <div class="physics-item mass-card" id="elem-5" aria-label="Questionable mass specimen">
+      <span class="orbit"></span><strong>?</strong>
+    </div>
+
+    <div class="physics-item note-card" id="elem-6">
+      <span class="specimen-label">Field note</span>
+      <p>I have no idea how this physics engine works. That has not stopped the experiment.</p>
+    </div>
+
+    <div class="physics-item credit-card" id="elem-7"><span>Prototype</span><strong>Gemini 3.1 Pro</strong></div>
+    <div class="physics-item credit-card orange-card" id="elem-8"><span>Reconstruction</span><strong>Claude + ChatGPT</strong></div>
+  </main>
+
+  <noscript>This experiment needs JavaScript. Gravity has been cancelled.</noscript>
+  <script src="script.js"></script>
+</body>
+</html>

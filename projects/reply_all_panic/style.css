@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+:root { --panic:#d92d20; --navy:#16202a; --paper:#f5f1e8; --yellow:#ffd447; }
+body.dot-grid { background:var(--paper)!important; background-image:none!important; font-family:'IBM Plex Mono',monospace!important; }
+body::before { content:'INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE'; position:fixed; z-index:90; top:0; left:0; width:100%; overflow:hidden; white-space:nowrap; padding:7px 12px; background:var(--panic); color:white; font:700 13px 'IBM Plex Mono',monospace; letter-spacing:.14em; }
+body > header { margin-top:28px; background:var(--navy)!important; color:white; border:0!important; }
+body > header nav { height:62px!important; }
+body > header span, body > header a { color:white!important; font-family:'IBM Plex Mono',monospace!important; }
+#game-timer { border-radius:0!important; background:var(--yellow)!important; color:var(--navy)!important; border:2px solid white; }
+body > .flex-1 { border-top:5px solid var(--panic); }
+aside { background:#d9d6cc!important; border-right:3px solid var(--navy)!important; }
+aside button { border-radius:0!important; background:var(--panic)!important; }
+#simulator-canvas { background:var(--paper)!important; }
+#simulator-canvas > div:first-child { border-bottom:3px solid var(--navy)!important; background:white; }
+#msg-subject { font:800 clamp(1.8rem,4vw,3.5rem)/.9 'Barlow Condensed',sans-serif!important; text-transform:uppercase; max-width:850px; }
+#unsend-btn { border-radius:0!important; background:var(--panic)!important; border:3px solid var(--navy); box-shadow:7px 7px 0 var(--navy)!important; font:800 16px 'Barlow Condensed',sans-serif!important; letter-spacing:.06em; }
+.modal-overlay { background:rgba(22,32,42,.88)!important; }
+.modal-overlay > div { border-radius:0!important; border:5px solid var(--navy)!important; box-shadow:14px 14px 0 var(--panic)!important; }
+.modal-overlay h2 { font:800 48px/.9 'Barlow Condensed',sans-serif!important; text-transform:uppercase; }
+.modal-overlay button { border-radius:0!important; background:var(--panic)!important; font-family:'Barlow Condensed',sans-serif!important; letter-spacing:.08em; }
+.slack-notif { border-radius:0!important; border-left:7px solid var(--panic)!important; }
+@media(max-width:700px){aside{display:none!important} body > header .max-w-xl{display:none}.modal-overlay h2{font-size:36px!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

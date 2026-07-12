@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;600&display=swap');
+:root{--van:#202a25;--paper:#d7e0d3;--green:#77a982;--red:#c74a43;--tape:#d8c276}
+body.heist-bg{background:var(--van)!important;background-image:repeating-linear-gradient(105deg,rgba(255,255,255,.018) 0 2px,transparent 2px 8px)!important;font-family:'IBM Plex Mono',monospace!important;color:var(--paper)}
+body>div:first-child>header,body>header{background:#131a17!important;border-bottom:1px solid #56655c!important} nav a{font-family:'IBM Plex Mono',monospace!important}
+#mission-hub{max-width:1180px;margin:0 auto;width:100%;padding:38px;background:var(--paper);color:#1f2823;box-shadow:0 0 0 1px #f1f4ec,18px 18px 0 rgba(0,0,0,.35);transform:rotate(-.35deg)}
+#mission-hub h1{font:400 clamp(2.3rem,5vw,4.8rem)/.92 'Special Elite',serif!important;color:#1f2823!important;text-transform:none!important}
+#mission-hub h1::before{content:'CASE FILE 0086 / ';color:var(--red)} #mission-hub p,#mission-hub span{color:#46554b!important}
+#mission-hub>div:first-child{border-bottom:2px dashed #6c796f;padding-bottom:24px}
+#mission-hub button{border-radius:0!important;border:2px solid #1f2823!important;background:transparent!important;color:#1f2823!important;box-shadow:5px 5px 0 #1f2823!important;font-family:'Special Elite',serif!important}
+#mission-hub button:hover{background:var(--tape)!important;transform:translate(-2px,-2px)!important}
+#gameplay-area{padding:22px!important} #scene-container{border-radius:0!important;border:2px solid var(--green)!important;background:#0d1511!important;box-shadow:0 0 28px rgba(119,169,130,.18)!important}
+#scene-container::before{content:'REC ●  CAM 04  /  PRIVATE RESIDENCE';position:absolute;z-index:5;top:15px;left:18px;color:var(--red);font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.1em}
+#hacking-terminal>div{border-radius:0!important} #hacking-grid button{border-radius:0!important;border:1px solid var(--green)!important}
+#inventory-grid>*,#comms-log{border-radius:0!important} #success-screen h2{font-family:'Special Elite',serif!important}
+@media(max-width:720px){#mission-hub{padding:24px 16px;transform:none}#gameplay-area{padding:8px!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

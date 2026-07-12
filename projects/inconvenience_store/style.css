@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Space+Mono:wght@400;700&display=swap');
+:root{--red:#e8392f;--yellow:#fff4a8;--blue:#1261a0;--ink:#151515;--tile:#f5f1df}
+body.dot-grid{background-color:var(--tile)!important;background-image:linear-gradient(90deg,rgba(18,97,160,.11) 1px,transparent 1px),linear-gradient(rgba(18,97,160,.11) 1px,transparent 1px)!important;background-size:28px 28px!important;font-family:'Space Mono',monospace!important;color:var(--ink)}
+body>header{background:var(--yellow)!important;border-bottom:5px solid var(--ink)!important;box-shadow:0 8px 0 var(--red);backdrop-filter:none!important}
+body>header nav{height:70px!important} body>header a{font-family:'Space Mono',monospace!important;font-weight:700}
+main{max-width:1280px!important;padding-top:64px!important} main>header{text-align:left!important;border:5px solid var(--ink);background:var(--red);color:white;padding:30px 34px;margin-bottom:40px!important;box-shadow:12px 12px 0 var(--blue);transform:rotate(-1deg)}
+main>header h1{font:400 clamp(3.4rem,8vw,7rem)/.8 'Bowlby One SC',sans-serif!important;letter-spacing:-.06em!important;text-shadow:5px 5px 0 var(--ink)} main>header p{color:white!important;font-weight:700!important;max-width:650px}
+#product-grid{gap:18px!important} #product-grid>div{border:4px solid var(--ink)!important;border-radius:0!important;background:var(--yellow)!important;box-shadow:7px 7px 0 var(--ink)!important;transition:transform .15s ease!important}
+#product-grid>div:hover{transform:translate(-3px,-3px) rotate(.5deg)!important;box-shadow:10px 10px 0 var(--blue)!important}
+#product-grid h2{font-family:'Bowlby One SC',sans-serif!important;line-height:1!important} #product-grid p,#product-grid button{font-family:'Space Mono',monospace!important}
+#product-grid button,#checkout-btn,#captcha-verify{border-radius:0!important;background:var(--red)!important;border:3px solid var(--ink)!important;box-shadow:4px 4px 0 var(--ink)!important;text-transform:uppercase}
+#cart-sidebar,#chatbot-panel,#captcha-modal>div{border-radius:0!important;border:4px solid var(--ink)!important;box-shadow:10px 10px 0 var(--red)!important} #chatbot-bubble{border-radius:0!important;background:var(--blue)!important;border:3px solid var(--ink)}
+@media(max-width:700px){main>header{transform:none;padding:24px 18px}main>header h1{font-size:3rem!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

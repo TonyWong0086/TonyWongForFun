@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Oddly Specific Talent Roster — Fun Stuffs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/theme.css">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        linkedin: {
+                            light: '#0a66c2',
+                            DEFAULT: '#004182',
+                            dark: '#002244',
+                            bg: '#f3f2ef'
+                        },
+                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        * { scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
+
+        body { background-color: #f3f2ef; }
+
+        .profile-banner {
+            background: linear-gradient(135deg, #004182 0%, #6366f1 100%);
+        }
+
+        .card-shadow {
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(0,0,0,0.08);
+        }
+
+        .endorsement-ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        .notif-badge {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+            50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-slate-900 font-sans selection:bg-linkedin/20">
+
+    <!-- Global Nav -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-[100] h-14">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../../index.html" class="bg-linkedin rounded p-1">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5V13.2a3.26 3.26 0 0 0-3.26-3.26c-1.1 0-2.02.58-2.5 1.45V10.2h-2.9v8.3h2.9v-4.72c0-.46.18-.9.58-1.2s.93-.45 1.34-.45c.75 0 1.29.54 1.29 1.33v5.04h2.95M7.14 18.5v-8.3H4.2v8.3h2.94M5.67 5.92A1.66 1.66 0 0 0 4 7.58a1.66 1.66 0 0 0 1.67 1.66A1.66 1.66 0 0 0 7.33 7.58A1.66 1.66 0 0 0 5.67 5.92z"/></svg>
+                </a>
+                <div class="hidden md:flex bg-slate-100 rounded-lg px-3 py-1.5 items-center gap-2 w-72">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" placeholder="Search for useless skills..." class="bg-transparent border-none focus:ring-0 text-sm w-full p-0">
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <!-- Nav Items -->
+                <div class="hidden lg:flex items-center gap-6 h-full border-r border-slate-200 pr-6 mr-6">
+                    <button class="flex flex-col items-center group">
+                        <svg class="w-5 h-5 text-slate-500 group-hover:text-slate-900" fill="currentColor" viewBox="0 0 24 24"><path d="M23 9v2h-2v7a3 3 0 0 1-3 3h-4v-6h-4v6H5a3 3 0 0 1-3-3v-7H0V9l11-7 12 7z"/></svg>
+                        <span class="text-[10px] text-slate-500 mt-0.5 group-hover:text-slate-900">Home</span>
+                    </button>
+                    <button class="flex flex-col items-center group relative">
+                        <svg class="w-5 h-5 text-slate-500 group-hover:text-slate-900" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"/></svg>
+                        <span class="text-[10px] text-slate-500 mt-0.5 group-hover:text-slate-900">Network</span>
+                        <span id="notif-network" class="absolute -top-1 right-0 bg-red-600 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden notif-badge">3</span>
+                    </button>
+                    <button id="inbox-toggle" class="flex flex-col items-center group relative">
+                        <svg class="w-5 h-5 text-slate-500 group-hover:text-slate-900" fill="currentColor" viewBox="0 0 24 24"><path d="M11 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-7l-4 4v-4z"/></svg>
+                        <span class="text-[10px] text-slate-500 mt-0.5 group-hover:text-slate-900">Messaging</span>
+                        <span id="notif-msg" class="absolute -top-1 right-0 bg-red-600 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden notif-badge">1</span>
+                    </button>
+                </div>
+                <div class="flex flex-col items-center ml-2">
+                    <div class="w-6 h-6 rounded-full bg-slate-200 border border-slate-300"></div>
+                    <span class="text-[10px] text-slate-500 mt-0.5">Me</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6">
+        
+        <!-- Left/Center Column -->
+        <div class="space-y-6">
+            
+            <!-- Profile Header Card -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow">
+                <div class="h-48 profile-banner relative"></div>
+                <div class="px-6 pb-6 relative">
+                    <div class="absolute -top-16 left-6 w-32 h-32 rounded-full border-4 border-white bg-slate-100 overflow-hidden">
+                        <!-- User Avatar -->
+                        <div class="w-full h-full flex items-center justify-center text-slate-300">
+                             <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 1 5-5 5 5 0 0 1-5 5zm0 10a8 8 0 0 0-8-8v-1a9 9 0 0 1 18 0v1a8 8 0 0 0-8 8z"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-20 flex justify-between items-start">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-900">Oddly Specific Talent Roster</h1>
+                            <p class="text-slate-600">Professional Snack Emancipator | Chief Microwave Strategist | World-Class Napper</p>
+                            <p class="text-slate-400 text-sm mt-1">Metropolis, Fantasy World • <span class="text-linkedin font-bold hover:underline cursor-pointer">500+ Meaningless Connections</span></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="bg-linkedin text-white px-4 py-1.5 rounded-full font-bold text-sm hover:brightness-110 transition-all">Open to Nothing</button>
+                            <button class="border border-linkedin text-linkedin px-4 py-1.5 rounded-full font-bold text-sm hover:bg-linkedin/5 transition-all">Add Profile Section</button>
+                            <button class="border border-slate-400 text-slate-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-50">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm0 10a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm0-5a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-bold mb-4">About</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Highly motivated individual with zero intention of contributing to the GDP. I specialize in tasks that provide immediate satisfaction with no long-term benefits. I can identify a perfectly ripe avocado by sound alone and have successfully guessed the ending of 47 direct-to-video action movies. Currently seeking roles that offer "unlimited breadsticks" as a primary compensation.
+                </p>
+            </div>
+
+            <!-- Skills & Endorsements -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold">Skills & Endorsements</h2>
+                    <button class="text-linkedin font-bold text-sm hover:underline">Add Skill</button>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- Skill 1 -->
+                    <div class="border-b border-slate-100 pb-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-slate-800">Microwave Precision</h3>
+                                <p class="text-xs text-slate-500 mt-1">Endorsed by <strong>Steve from Finance</strong> and <span data-count="microwave">14</span> others</p>
+                            </div>
+                            <button onclick="endorse('microwave')" class="border border-slate-400 text-slate-600 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-50 transition-all">Endorse</button>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                             <div class="w-6 h-6 rounded-full bg-slate-200"></div>
+                             <p class="text-[10px] text-slate-500">"They literally stop it at 0:01 every single time. It's spooky." — <strong>Random Recruiter</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="border-b border-slate-100 pb-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-slate-800">Grocery Bag Tetris</h3>
+                                <p class="text-xs text-slate-500 mt-1">Endorsed by <strong>Your Mom</strong> and <span data-count="bags">32</span> others</p>
+                            </div>
+                            <button onclick="endorse('bags')" class="border border-slate-400 text-slate-600 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-50 transition-all">Endorse</button>
+                        </div>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="pb-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-slate-800">Advanced Procrastination</h3>
+                                <p class="text-xs text-slate-500 mt-1">Endorsed by <strong>The Entire Internet</strong></p>
+                            </div>
+                            <button onclick="endorse('procrastinate')" class="border border-slate-400 text-slate-600 px-4 py-1 rounded-full text-xs font-bold hover:bg-slate-50 transition-all">Endorse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+            <!-- Feed / People you may know -->
+            <div class="bg-white rounded-xl p-4 card-shadow">
+                <h2 class="text-sm font-bold text-slate-900 mb-4">People you may know</h2>
+                <div class="space-y-4">
+                    <div class="flex gap-3">
+                         <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 font-bold text-xs shrink-0">KB</div>
+                         <div>
+                             <p class="text-xs font-bold">Kevin Bacon</p>
+                             <p class="text-[10px] text-slate-500">Professional Background Extra</p>
+                             <button class="mt-2 border border-slate-400 px-3 py-1 rounded-full text-[10px] font-bold text-slate-600 hover:bg-slate-50">Connect</button>
+                         </div>
+                    </div>
+                    <div class="flex gap-3">
+                         <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">JD</div>
+                         <div>
+                             <p class="text-xs font-bold">Jane Doe-Nut</p>
+                             <p class="text-[10px] text-slate-500">Expert in Powdered Sugar Science</p>
+                             <button class="mt-2 border border-slate-400 px-3 py-1 rounded-full text-[10px] font-bold text-slate-600 hover:bg-slate-50">Connect</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad / Promotion -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow sticky top-20">
+                <div class="p-4 text-center">
+                    <p class="text-[10px] text-slate-500 mb-2">Ad • ...</p>
+                    <p class="text-sm text-slate-700 font-medium">Want to earn $0.00/hour doing what you love?</p>
+                    <div class="my-4 flex justify-center">
+                        <div class="w-16 h-16 rounded-xl bg-linkedin/10 flex items-center justify-center text-linkedin">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="text-xs font-bold text-linkedin hover:underline cursor-pointer">Learn More about Uselessness</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Messaging Overlay / Toast -->
+    <div id="msg-panel" class="fixed bottom-0 right-10 w-80 bg-white card-shadow rounded-t-xl z-[150] translate-y-[calc(100%-48px)] transition-transform duration-300">
+        <div id="msg-header" class="p-3 border-b border-slate-100 flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                <span class="text-sm font-bold">Messaging</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm0 10a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm0-5a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/></svg>
+                <svg id="msg-arrow" class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+            </div>
+        </div>
+        <div id="msg-list" class="h-96 overflow-y-auto p-4 space-y-4 bg-slate-50">
+            <!-- Messages inject here -->
+             <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-lg text-[10px] text-indigo-700 italic">
+                 Welcome to your Professional Inbox. Prepare to be disappointed.
+             </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notif-toast" class="fixed top-20 right-6 z-[200] max-w-xs bg-slate-900 text-white p-4 rounded-xl shadow-2xl translate-x-80 transition-transform duration-500 opacity-0 pointer-events-none">
+        <div class="flex gap-3">
+             <div class="w-8 h-8 rounded-full bg-linkedin flex items-center justify-center shrink-0">
+                 <svg class="w-4 h-4" fill="white" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 1 9-9 9 9 0 0 1-9 9zm0-16a7 7 0 1 0 7 7 7 7 0 0 0-7-7zm0 10a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm0-8a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1z"/></svg>
+             </div>
+             <div>
+                 <p id="notif-title" class="text-xs font-bold"></p>
+                 <p id="notif-desc" class="text-[10px] text-slate-400 mt-1"></p>
+             </div>
+        </div>
+    </div>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

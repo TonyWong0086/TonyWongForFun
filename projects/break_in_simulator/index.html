@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Operation: Spare Key — Fun Stuffs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/theme.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                        tactical: '#10b981',
+                        alert: '#ef4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        * { scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
+
+        .terminal-glow {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .heist-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(30, 41, 59, 0.4) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .interactive-object {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .interactive-object:hover {
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+            transform: scale(1.02);
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(16, 185, 129, 0.1);
+            position: absolute;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(16, 185, 129, 0.3); }
+            50% { border-color: rgba(16, 185, 129, 1); }
+        }
+        .pulse-tactical {
+            animation: pulse-border 2s infinite;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="heist-bg min-h-screen text-slate-300 font-sans selection:bg-tactical/30 overflow-hidden">
+    <div class="crt-overlay"></div>
+    <div class="scanline"></div>
+
+    <!-- Header / Nav -->
+    <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur-md relative z-10">
+        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a class="text-tactical font-mono font-bold text-xl tracking-wider" href="../../index.html">HEIST_OS<span
+                        class="text-slate-600 font-normal">.v1</span></a>
+                <div class="h-4 w-px bg-slate-800"></div>
+                <span class="text-xs font-mono text-slate-500 uppercase tracking-widest">Infiltration Module</span>
+            </div>
+            <a class="text-xs font-mono text-slate-500 hover:text-tactical transition-colors" href="../../index.html">[ EXIT_SIMULATION ]</a>
+        </nav>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="max-w-6xl mx-auto p-6 md:p-10 flex flex-col h-[calc(100vh-64px)] relative z-10">
+        
+        <!-- Mission Selection Screen -->
+        <div id="mission-hub" class="flex-1 flex flex-col animate-in fade-in duration-700">
+            <div class="mb-10 flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-mono font-bold text-slate-100 flex items-center gap-3 mb-2 uppercase tracking-tighter">
+                        <span class="w-3 h-3 bg-tactical inline-block rounded-full animate-pulse"></span>
+                        Available Mundane Targets
+                    </h1>
+                    <p class="text-slate-500 font-mono text-sm tracking-tight">Select a high-priority, zero-value infiltration target.</p>
+                </div>
+                <!-- Boredom Meter -->
+                <div class="text-right">
+                    <p class="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-1">Boredom_Level</p>
+                    <div class="w-48 h-2 bg-slate-900 rounded-full border border-slate-800 overflow-hidden">
+                        <div id="boredom-bar" class="h-full bg-tactical transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                <!-- Target 1 -->
+                <button onclick="selectMission('dmv')" class="group text-left p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-tactical transition-all hover:bg-slate-900">
+                    <div class="mb-6 text-slate-600 group-hover:text-tactical transition-colors">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+                    </div>
+                    <h3 class="font-mono font-bold text-slate-100 text-lg mb-2 group-hover:text-tactical">OP: TICKET_MASTER</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-mono">Infiltrate the local DMV after hours. Objective: Dispense one (1) "Now Serving" ticket.</p>
+                </button>
+
+                <!-- Target 2 -->
+                <button onclick="selectMission('restaurant')" class="group text-left p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-tactical transition-all hover:bg-slate-900">
+                    <div class="mb-6 text-slate-600 group-hover:text-tactical transition-colors">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.703 2.703 0 01-3 0 2.703 2.703 0 01-3 0 2.703 2.703 0 01-3 0 2.701 2.701 0 01-1.5-.454M9 16v2m3-6v6m3-8v8m2-12l3 3m0 0l3-3m-3 3v12"/></svg>
+                    </div>
+                    <h3 class="font-mono font-bold text-slate-100 text-lg mb-2 group-hover:text-tactical">OP: BREADSTICK_REBELS</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-mono">Infiltrate an Olive Garden. Objective: Locate the sacred 'Unlimited Breadstick' formula.</p>
+                </button>
+
+                <!-- Target 3 -->
+                <button onclick="selectMission('dentist')" class="group text-left p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-tactical transition-all hover:bg-slate-900">
+                    <div class="mb-6 text-slate-600 group-hover:text-tactical transition-colors">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.168.477-4.5 1.253"/></svg>
+                    </div>
+                    <h3 class="font-mono font-bold text-slate-100 text-lg mb-2 group-hover:text-tactical">OP: WAITING_ROOM</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-mono">Bypass Sunny Smiles Dentistry security. Objective: Read a 2014 gossip magazine.</p>
+                </button>
+
+                <!-- Target 4 -->
+                <button onclick="selectMission('library')" class="group text-left p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-tactical transition-all hover:bg-slate-900">
+                    <div class="mb-6 text-slate-600 group-hover:text-tactical transition-colors">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21V3m0 18a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253"/></svg>
+                    </div>
+                    <h3 class="font-mono font-bold text-slate-100 text-lg mb-2 group-hover:text-tactical">OP: OVERDUE_BOOKS</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed font-mono">Infiltrate the municipal library. Objective: Return a book without paying the 50-cent fine.</p>
+                </button>
+            </div>
+
+            <div class="p-4 bg-tactical/5 border border-tactical/20 rounded-xl font-mono text-[10px] text-tactical mt-auto">
+                [SYSTEM_LOG]: Initializing tactical inventory... Loading useless debris... Simulation ready.
+            </div>
+        </div>
+
+        <!-- Gameplay Screen -->
+        <div id="gameplay-area" class="flex-1 flex flex-col gap-6 hidden relative">
+            
+            <!-- Hacking Terminal Overlay -->
+            <div id="hacking-terminal" class="absolute inset-0 z-50 bg-slate-950/95 backdrop-blur-md items-center justify-center flex flex-col p-10 hidden">
+                <div class="w-full max-w-lg bg-slate-900 border border-tactical/50 rounded-2xl p-8 terminal-glow">
+                    <h3 class="text-tactical font-mono text-xl mb-6 flex items-center gap-3">
+                        <span class="animate-pulse">_</span> BOREDOM_BYPASS.exe
+                    </h3>
+                    <p id="hacking-prompt" class="text-slate-400 font-mono text-xs mb-8">INITIATING SYNC... REPEAT THE PATTERN TO BYPASS SECURITY.</p>
+                    <div id="hacking-grid" class="grid grid-cols-3 gap-4 mb-8">
+                        <!-- Buttons injected by JS -->
+                    </div>
+                    <div id="hacking-status" class="text-center font-mono text-[10px] text-slate-500 uppercase tracking-widest">
+                        Status: Standby
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Scene (Visual Area) -->
+            <div id="scene-container" class="relative flex-1 bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden terminal-glow pulse-tactical transition-all">
+                <div id="scene-visual" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                    <!-- Dynamic SVG scenery injects here -->
+                </div>
+                
+                <div id="interaction-layer" class="absolute inset-0">
+                    <!-- Clickable points inject here -->
+                </div>
+
+                <!-- Scene Overlay Text -->
+                <div class="absolute bottom-6 left-6 right-6 p-4 bg-slate-950/80 backdrop-blur-sm border border-slate-800 rounded-xl">
+                    <p id="system-msg" class="text-tactical font-mono text-xs uppercase tracking-widest leading-relaxed">
+                        Initializing mission... Use inventory to interact with area.
+                    </p>
+                </div>
+            </div>
+
+            <!-- UI Bottom Row (Inventory & Log) -->
+            <div class="h-48 flex gap-6">
+                <!-- Tactical Inventory -->
+                <div class="w-1/2 bg-slate-950/50 border border-slate-800 rounded-3xl p-6 flex flex-col">
+                    <h4 class="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-4">Tactical_Assets.zip</h4>
+                    <div id="inventory-grid" class="flex-1 grid grid-cols-4 gap-4">
+                        <!-- Items inject here -->
+                    </div>
+                </div>
+
+                <!-- Operation Log -->
+                <div class="w-1/2 bg-slate-950/50 border border-slate-800 rounded-3xl p-6 flex flex-col overflow-hidden">
+                    <h4 class="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-4">COMMS_LOG_DECRYPTED</h4>
+                    <div id="comms-log" class="flex-1 font-mono text-[10px] text-slate-500 space-y-1 overflow-y-auto">
+                        <div class="text-slate-600 italic">SYSTEM: Establishing secure connection...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success/Anti-Climax Screen -->
+        <div id="success-screen" class="flex-1 flex flex-col items-center justify-center text-center hidden">
+            <h2 class="text-6xl font-mono font-bold text-tactical mb-4 animate-pulse uppercase tracking-tighter">SUCCESS.</h2>
+            <div class="h-px w-64 bg-slate-800 mb-8"></div>
+            <p class="text-slate-100 font-mono text-2xl mb-12">You are now inside. Congratulations.</p>
+            <p class="text-slate-500 font-mono text-sm mb-12">Total Monetary Value Obtained: $0.00</p>
+            <button onclick="location.reload()" class="px-8 py-3 bg-slate-900 border border-slate-800 rounded-full font-mono text-xs hover:border-tactical transition-all uppercase tracking-widest">
+                [ Go Home ]
+            </button>
+        </div>
+
+    </main>
+
+    <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back data-dark></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

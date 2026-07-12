@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&display=swap');
+
+:root { --ink:#161411; --paper:#f1ead8; --red:#9b2c20; --rule:#b8ad94; }
+body.dot-grid { background:var(--paper); background-image:linear-gradient(rgba(22,20,17,.05) 1px,transparent 1px); background-size:100% 32px; color:var(--ink); }
+body > header { background:var(--paper)!important; border-bottom:2px solid var(--ink)!important; backdrop-filter:none!important; }
+body > header nav { height:64px!important; }
+body > header a:first-child { font:500 15px 'DM Mono',monospace; letter-spacing:.08em; }
+main { max-width:1440px!important; padding-top:42px!important; }
+main > header { text-align:left!important; margin-bottom:48px!important; display:grid; grid-template-columns:1fr auto; align-items:end; border-bottom:8px solid var(--ink); padding-bottom:24px; }
+main > header > div { display:none!important; }
+main > header h1 { font:400 clamp(3.4rem,9vw,8.5rem)/.82 'Archivo Black',sans-serif!important; max-width:850px; letter-spacing:-.07em!important; margin:0!important; text-transform:uppercase; }
+main > header h1 span { font-style:normal!important; }
+main > header > p { grid-column:2; max-width:330px; font:500 12px/1.6 'DM Mono',monospace!important; color:var(--ink)!important; text-transform:uppercase; }
+.price-tag { background:none!important; -webkit-text-fill-color:var(--red)!important; color:var(--red)!important; }
+#product-grid { gap:0!important; border-top:1px solid var(--ink); border-left:1px solid var(--ink); }
+#product-grid > div { border:0!important; border-right:1px solid var(--ink)!important; border-bottom:1px solid var(--ink)!important; border-radius:0!important; box-shadow:none!important; background:rgba(255,255,255,.25)!important; position:relative; min-height:465px; }
+#product-grid > div::before { content:'ACCESSION / PRIVATE SALE'; font:500 9px 'DM Mono',monospace; letter-spacing:.12em; color:var(--red); }
+#product-grid > div:hover { transform:none!important; background:#fff9e9!important; }
+#product-grid h2 { font:400 25px/1.05 'Archivo Black',sans-serif!important; text-transform:uppercase; }
+#product-grid p, #product-grid button { font-family:'DM Mono',monospace!important; }
+#product-grid button { border-radius:0!important; background:var(--ink)!important; text-transform:uppercase; letter-spacing:.08em; }
+.cart-panel, #receipt-modal > div { border-radius:0!important; background:#fff9e9!important; border-left:2px solid var(--ink); }
+@media(max-width:760px){ main > header{display:block} main > header > p{margin-top:22px} #product-grid > div{min-height:auto} }
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

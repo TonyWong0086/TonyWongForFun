@@ -78,29 +78,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatSend = document.getElementById('chat-send');
     const chatMessages = document.getElementById('chat-messages');
 
+    // Small product illustrations belong to this shop, not the shared hub.
+    const shelfArt = [
+        `<g transform="rotate(-9 120 90)"><rect x="57" y="29" width="126" height="126" rx="4" fill="#f4eacb"/><path d="M57 71h22c-8-18 21-18 13 0h27V29m0 42h22c-8 18 21 18 13 0h29M57 113h22c-8 18 21 18 13 0h27v42m0-84v22c18-8 18 21 0 13v7h64"/><path d="M141 29v23c18-8 18 21 0 13v6h42V29Z" fill="#e7ece5" stroke="none"/></g>`,
+        `<g transform="rotate(-24 120 90)"><rect x="92" y="22" width="56" height="49" rx="3" fill="#c0cac6"/><path d="M107 35v13m25-13v13" stroke-width="7"/><rect x="83" y="66" width="74" height="100" rx="15" fill="#315f50"/><rect x="94" y="77" width="52" height="69" rx="9" fill="#a4c5ad"/><circle cx="120" cy="155" r="3" fill="#bce7b5" stroke="none"/></g>`,
+        `<g transform="rotate(13 120 90)"><path d="M97 22h55v79c0 17-10 24-27 32l-39 21c-25 13-44-19-21-34l32-23Z" fill="#e8dfcf"/><path d="M97 42h55M97 49h55M105 22v18m12-18v18m12-18v18m12-18v18"/><path d="M69 117c16 0 26 13 24 31m45-55c-12 1-20 9-20 21"/><path d="M161 129c0 0-11 15-11 21a11 11 0 0022 0c0-6-11-21-11-21Z" fill="#9cc2cb" stroke="none"/></g>`,
+        `<path d="M53 57 137 28 188 71 103 109Z" fill="#f1eadc"/><path d="M53 57v58l50 40v-46m0 46 85-36V71" fill="#c4d3bf"/><path d="m53 80 50 40 85-34"/><path d="m137 28 7 30 29-1 15 14-35 8-6-22" fill="#f7f2e7"/><path d="m171 44 5-12m7 19 11-4" stroke="#a56b46"/>`,
+        `<path d="M65 110V82a55 55 0 01110 0v28" fill="none" stroke="#315f50" stroke-width="16"/><path d="M65 82a55 55 0 01110 0" fill="none" stroke="#a6c1ab" stroke-width="6"/><rect x="51" y="93" width="30" height="61" rx="14" fill="#315f50"/><rect x="159" y="93" width="30" height="61" rx="14" fill="#315f50"/><rect x="74" y="97" width="12" height="52" rx="6" fill="#c4d3bf"/><rect x="154" y="97" width="12" height="52" rx="6" fill="#c4d3bf"/><path d="m108 115 24 24m0-24-24 24" stroke="#a56b46" stroke-width="3"/>`,
+        `<g transform="rotate(8 120 90)"><rect x="82" y="28" width="76" height="136" rx="15" fill="#a7c6ae"/><ellipse cx="120" cy="30" rx="37" ry="9" fill="#dce3d9"/><ellipse cx="120" cy="29" rx="12" ry="4" fill="#768b7d"/><path d="M83 47h74M83 146h74"/><path d="M82 73h76v48H82" fill="#eef2da" stroke="none"/><text x="120" y="95" text-anchor="middle" stroke="none" fill="#315f50" font-size="16" font-family="Arial" font-weight="700">ALMOST</text><text x="120" y="111" text-anchor="middle" stroke="none" fill="#315f50" font-size="10" font-family="Arial">COLD SODA</text></g>`
+    ];
+
     // 3. Render Products
     function renderProducts() {
-        productGrid.innerHTML = products.map(p => `
-            <div class="card-hover bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between group">
-                <div>
-                    <div class="mb-6 w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-800 shadow-sm">
-                        ${p.icon}
-                    </div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2 py-0.5 bg-brand/10 text-brand text-[10px] font-bold uppercase rounded-md tracking-wider">
-                            ${p.tag}
-                        </span>
-                        <span class="text-slate-400 text-xs font-medium">$${p.price}</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">${p.name}</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">${p.desc}</p>
+        productGrid.innerHTML = products.map((p, index) => `
+            <article class="shelf-product">
+                <div class="product-stage">
+                    <span class="product-tag">${p.tag}</span>
+                    <svg viewBox="0 0 240 190" fill="none" stroke="#60766a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shelfArt[index]}</svg>
                 </div>
-                <button onclick="addToCart(${p.id})" 
-                    class="mt-6 w-full py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-brand transition-all flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Add to Cart
-                </button>
-            </div>
+                <div class="product-copy">
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                    <div class="product-purchase">
+                        <span class="product-price">$${p.price.toFixed(2)}</span>
+                        <button type="button" onclick="addToCart(${p.id})" aria-label="Add ${p.name} to bag">Add to bag <span aria-hidden="true">+</span></button>
+                    </div>
+                </div>
+            </article>
         `).join('');
     }
 

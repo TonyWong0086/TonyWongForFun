@@ -18,7 +18,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { light: '#6366f1', DEFAULT: '#4f46e5', dark: '#4338ca' },
+                        brand: { light: '#397e65', DEFAULT: '#245e4c', dark: '#173d32' },
                         danger: '#ef4444',
                         misery: '#f59e0b',
                     },
@@ -74,48 +74,45 @@
 
 <body class="dot-grid min-h-screen text-slate-900 font-sans selection:bg-brand/20 flex flex-col">
 
-    <!-- Header -->
-    <header class="bg-white border-b border-slate-200 z-50 sticky top-0">
-        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a class="text-brand font-bold text-xl tracking-tight" href="../../index.html">TonyWong<span
-                        class="text-slate-400 font-medium">0086</span></a>
-                <div class="h-6 w-px bg-slate-200 mx-2"></div>
-                <span class="text-sm font-semibold text-slate-500">The Inconvenience Store</span>
-            </div>
-            <div class="flex items-center gap-6">
-                <button id="cart-toggle"
-                    class="relative p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-500">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121 0 2.09-.77 2.349-1.862l1.683-7.088H6.106" />
-                    </svg>
-                    <span id="cart-count"
-                        class="absolute -top-1 -right-1 bg-danger text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+    <header class="shop-header">
+        <nav class="shop-nav" aria-label="Store navigation">
+            <a class="shop-brand" href="../../index.html"><span class="shop-symbol" aria-hidden="true">i.</span>The Inconvenience Store</a>
+            <div class="shop-nav-actions">
+                <a href="../../index.html">Back to hub</a>
+                <button id="cart-toggle" class="basket-button" type="button" aria-label="Open shopping bag">
+                    Bag <span id="cart-count" class="hidden">0</span><span aria-hidden="true">↗</span>
                 </button>
-                <a class="text-sm font-medium text-slate-500 hover:text-brand" href="../../index.html">Back to Hub</a>
             </div>
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="max-w-7xl mx-auto px-6 pt-16 pb-10 text-center">
-        <div class="mb-8 w-20 h-20 bg-amber-50 rounded-3xl flex items-center justify-center text-amber-500 shadow-sm mx-auto">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.15c0 .415.336.75.75.75z" />
-            </svg>
+    <section class="storefront" aria-labelledby="shop-title">
+        <div class="storefront-inner">
+            <div class="storefront-copy">
+                <p class="shop-eyebrow"><span class="open-light" aria-hidden="true"></span>Your local source of mild disappointment</p>
+                <h1 id="shop-title">OPEN<br><span class="hours">24/7<span class="ish">-ish.</span></span></h1>
+                <p class="storefront-description">Everyday essentials. One small thing wrong with every single one.</p>
+                <a href="#inventory" class="shop-link">Browse the shelves <span aria-hidden="true">↓</span></a>
+            </div>
+            <aside class="hours-sign" aria-label="Store opening hours">
+                <span class="sign-hanger" aria-hidden="true"></span>
+                <p class="sign-heading">COME ON IN</p>
+                <p class="sign-open">probably<br>open.</p>
+                <div class="sign-rule"></div>
+                <p>Monday–Sunday</p>
+                <strong>Whenever we feel like it.</strong>
+                <span class="sign-foot">Back in 5 minutes. Since 2019.</span>
+            </aside>
         </div>
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">OPEN 24/7-ish</h1>
-        <p class="text-slate-500 max-w-xl mx-auto leading-relaxed">Premium products meticulously
-            engineered to ruin your day in small, unforgettable ways.</p>
     </section>
 
-    <!-- Product Grid -->
-    <main class="max-w-7xl mx-auto px-6 pb-16">
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Products injected by JS -->
+    <main class="shop-main" id="inventory">
+        <div class="shelf-heading">
+            <div><p class="shop-eyebrow">Stocked with questionable care</p><h2>The daily inconveniences.</h2></div>
+            <span class="stock-count">6 essentials / 0 good ideas</span>
         </div>
+        <div id="product-grid" class="shelf-grid"></div>
+        <p class="shelf-footer">Thank you for shopping. We hope it was almost fine.</p>
     </main>
 
     <!-- Cart Sidebar -->
@@ -124,7 +121,7 @@
         class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[90] translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-6 border-b border-slate-100 flex items-center justify-between">
             <h2 class="text-xl font-bold">Your Cart of Regret</h2>
-            <button id="cart-close" class="p-2 hover:bg-slate-100 rounded-xl text-slate-400">
+            <button id="cart-close" aria-label="Close shopping bag" class="p-2 hover:bg-slate-100 rounded-xl text-slate-400">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -179,7 +176,7 @@
                 <p class="font-bold text-sm">Customer "Service"</p>
                 <p class="text-[10px] opacity-70">Avg. response time: Instant (unfortunately)</p>
             </div>
-            <button id="chatbot-close" class="p-1 hover:bg-white/20 rounded-lg">
+            <button id="chatbot-close" aria-label="Close customer service" class="p-1 hover:bg-white/20 rounded-lg">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>

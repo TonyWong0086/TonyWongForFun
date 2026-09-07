@@ -12,7 +12,7 @@ Each toy borrows its visual language from its own premise. Shared code in `asset
 | Reply-All Panic | Office mail client | Desktop `#668c8c`, chrome `#d4d0c8`, title bar `#003c78` | Tahoma, inset panes, beveled buttons, and native-looking notification dialogs |
 | Spare Key | Architect's blueprint | Blueprint `#123b66`, chalk `#d9efff`, annotation `#ffc569` | A two-by-two plan with thin drawing lines and open mission annotations |
 | Human Verification | Self-service airport kiosk | Concourse `#1544b2`, housing `#dce5f6`, screen `#f9fbff` | Large wayfinding text beside a molded white verification terminal |
-| Inconvenience Store | Fluorescent corner shop | Sign `#1261a0`, awning `#e8392f`, stock label `#fff4a8` | Striped awning, oversized shop sign, and product shelves with price labels |
+| Inconvenience Store | Neighborhood shop after dark | Storefront `#183f33`, mint `#d7e9c8`, shelves `#f5f6f0` | Quiet Space Grotesk lettering, a hanging opening-hours sign, custom product illustrations, and simple shelf labels |
 | Impossible Lots | Private auction house | Oxblood `#521b30`, gold `#dbc69e`, gallery `#faf7f3` | Playfair display, generous lot illustrations, two-column acquisitions catalog |
 | Cookie Consent | Botanical shop interrupted | Leaf `#275d47`, mist `#e7efe6`, vendor white `#ffffff` | Tea packaging and a full-width vendor consent sheet covering the bottom |
 | Containment Button | Emergency stop station | Casing `#f3bd22`, switch `#d8261c`, hardware `#24231d` | Yellow equipment wall dominated by a circular mushroom switch |
@@ -29,4 +29,4 @@ Each toy borrows its visual language from its own premise. Shared code in `asset
 - Keep game IDs, state classes, and event handlers intact when changing presentation.
 - Scope utility overrides to the actual component; avoid substring matches that also match hover classes.
 - Check both the initial view and active states at desktop and phone widths. Moving overlays and generated content need their own checks.
-- The hub uses real page screenshots in `assets/previews/`. Refresh the corresponding WebP when a project's visual identity changes; use a 1440 × 1000 desktop capture resized to 720 × 500.
+- The hub uses real page screenshots in `assets/previews/`. Refresh the corresponding WebP when a project's visual identity changes; use a 1440 Ã— 1000 desktop capture resized to 720 Ã— 500.

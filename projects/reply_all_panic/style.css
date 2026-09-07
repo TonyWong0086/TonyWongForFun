@@ -1,23 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
-
-:root { --panic:#d92d20; --navy:#16202a; --paper:#f5f1e8; --yellow:#ffd447; }
-body.dot-grid { background:var(--paper)!important; background-image:none!important; font-family:'IBM Plex Mono',monospace!important; }
-body::before { content:'INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE  ·  INCIDENT ACTIVE'; position:fixed; z-index:90; top:0; left:0; width:100%; overflow:hidden; white-space:nowrap; padding:7px 12px; background:var(--panic); color:white; font:700 13px 'IBM Plex Mono',monospace; letter-spacing:.14em; }
-body > header { margin-top:28px; background:var(--navy)!important; color:white; border:0!important; }
-body > header nav { height:62px!important; }
-body > header span, body > header a { color:white!important; font-family:'IBM Plex Mono',monospace!important; }
-#game-timer { border-radius:0!important; background:var(--yellow)!important; color:var(--navy)!important; border:2px solid white; }
-body > .flex-1 { border-top:5px solid var(--panic); }
-aside { background:#d9d6cc!important; border-right:3px solid var(--navy)!important; }
-aside button { border-radius:0!important; background:var(--panic)!important; }
-#simulator-canvas { background:var(--paper)!important; }
-#simulator-canvas > div:first-child { border-bottom:3px solid var(--navy)!important; background:white; }
-#msg-subject { font:800 clamp(1.8rem,4vw,3.5rem)/.9 'Barlow Condensed',sans-serif!important; text-transform:uppercase; max-width:850px; }
-#unsend-btn { border-radius:0!important; background:var(--panic)!important; border:3px solid var(--navy); box-shadow:7px 7px 0 var(--navy)!important; font:800 16px 'Barlow Condensed',sans-serif!important; letter-spacing:.06em; }
-.modal-overlay { background:rgba(22,32,42,.88)!important; }
-.modal-overlay > div { border-radius:0!important; border:5px solid var(--navy)!important; box-shadow:14px 14px 0 var(--panic)!important; }
-.modal-overlay h2 { font:800 48px/.9 'Barlow Condensed',sans-serif!important; text-transform:uppercase; }
-.modal-overlay button { border-radius:0!important; background:var(--panic)!important; font-family:'Barlow Condensed',sans-serif!important; letter-spacing:.08em; }
-.slack-notif { border-radius:0!important; border-left:7px solid var(--panic)!important; }
-@media(max-width:700px){aside{display:none!important} body > header .max-w-xl{display:none}.modal-overlay h2{font-size:36px!important}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Late-1990s office mail: beveled controls and a modal that belongs to the OS. */
+body.dot-grid { background:#668c8c!important; background-image:none!important; font-family:Tahoma,'Segoe UI',sans-serif!important; }
+body > header { background:#d4d0c8!important; border:2px outset #fff!important; }
+body > header nav { height:58px!important; }
+body > header nav > div:first-child > div:first-child { background:#003c78!important; border-radius:0!important; }
+#game-timer { border:2px inset white; border-radius:0!important; background:#fff!important; color:#ab1d2b!important; font-family:'Courier New',monospace!important; }
+aside { background:#e6e2da!important; border-right:2px groove white!important; }
+aside button { border:2px outset white!important; border-radius:0!important; background:#d4d0c8!important; color:#152435!important; box-shadow:none!important; }
+#simulator-canvas { margin:12px; border:2px inset #fff; background:#fff!important; }
+#simulator-canvas > div:first-child { background:#f2efe9; }
+#msg-subject { font-family:Tahoma,sans-serif!important; font-size:22px!important; font-weight:700!important; }
+#unsend-btn { border:3px outset #fff!important; border-radius:0!important; background:#d4d0c8!important; color:#14243a!important; box-shadow:2px 2px #53616c!important; font:700 14px Tahoma,sans-serif!important; }
+.modal-overlay { background:#173a4670!important; backdrop-filter:none!important; }
+.modal-overlay > div { position:relative; padding-top:68px!important; border:3px outset white!important; border-radius:0!important; background:#d4d0c8!important; box-shadow:10px 12px 0 #173a4630!important; }
+.modal-overlay > div::before { content:'Mail delivery notification'; position:absolute; inset:3px 3px auto; background:linear-gradient(90deg,#003c78,#668db5); color:white; text-align:left; padding:7px 10px; font:bold 13px Tahoma,sans-serif; }
+.modal-overlay h2 { font:700 28px/1.15 Tahoma,sans-serif!important; letter-spacing:-.03em; }
+.modal-overlay button { border:2px outset #fff!important; border-radius:0!important; background:#d4d0c8!important; color:#152435!important; box-shadow:none!important; }
+.slack-notif { border:2px outset white!important; border-radius:0!important; font-family:Tahoma,sans-serif; }
+@media(max-width:700px){aside{display:none!important}body>header .max-w-xl{display:none}#simulator-canvas{margin:4px}#simulator-canvas>div:first-child{padding:18px!important}.modal-overlay>div{padding:56px 22px 24px!important}.modal-overlay h2{font-size:25px!important}}
+@media(max-width:700px){body>header nav{padding:0 10px!important;gap:12px}body>header nav>div:first-child{min-width:0;gap:6px!important}body>header nav>div:first-child>div,body>header nav>div:first-child>span{display:none}body>header nav>div:first-child>a{font-size:14px!important}body>header nav>div:last-child{gap:8px!important}body>header nav>div:last-child>a{font-size:10px!important}#game-timer{font-size:13px!important;padding:5px!important;white-space:nowrap}}

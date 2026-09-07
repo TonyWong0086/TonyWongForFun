@@ -278,3 +278,29 @@ h1, p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .power i, .shake { animation: none; }
 }
+
+/* Bench instrument: ivory enclosure, red LED display, large measurement windows. */
+:root { --room:#bac4cb; --chassis:#e0e3df; --chassis-2:#f0f0e8; --edge:#9ba6a6; --screen:#291514; --phosphor:#ff9277; --phosphor-dim:#c37560; --label:#36464c; --label-dim:#596c73; }
+body { background:#bac4cb; background-image:linear-gradient(135deg,#dce1e3,transparent); }
+.rack { width:min(980px,100%); border:2px solid #9ba6a6; border-radius:22px; background:#e5e7df; box-shadow:0 12px 0 #899599,0 35px 55px #35495440; padding:12px; }
+.chassis-top { border-bottom:2px solid #adb5af; padding:16px; }
+.unit-name { color:#36464c; font-size:18px; }
+.unit-id { color:#984438; border-color:#a7b1aa; }
+.power { color:#455b52; }
+.panel { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(170px,.6fr); gap:28px; padding:32px 20px; }
+.intake { align-self:center; }
+.field-label { font-size:15px; }
+#password-input { padding:24px 16px; font-size:24px; border-radius:10px; }
+#password-input::placeholder { color:#cba093; }
+.readouts { margin:0; grid-template-columns:1fr 1fr; gap:12px; }
+.readout { background:#c9d0bf; border:1px solid #919e8b; border-radius:3px; }
+.readout strong { color:#364b36; }
+.readout-wide { grid-column:1/-1; }
+.verdict,.banner { grid-column:1/-1; margin:0; }
+.chassis-foot { color:#596c73; border-color:#adb5af; }
+@media(max-width:650px){.panel{grid-template-columns:1fr;padding:20px 8px;gap:20px}.unit-name{font-size:13px}.chassis-top{padding:12px 4px;gap:8px}.rack{padding:8px}.readouts{grid-template-columns:2fr 1fr 1fr}.readout-wide{grid-column:auto}}
+.verdict { background:#f2f0e5; }
+#judgment-text { color:#36464c; }
+.banner { color:#8b441b; }
+.readout { box-shadow:inset 0 2px 5px #43593725; }
+.readout strong { text-shadow:none; }

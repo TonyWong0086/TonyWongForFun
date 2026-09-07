@@ -158,3 +158,14 @@ body.flash input::placeholder { color: rgba(255, 255, 255, .6); }
   .shake { animation: none; }
   .rec i { animation: none; }
 }
+
+/* Summer blockbuster: widescreen blue shadows, hot amber titles, one explosive input. */
+:root { --shot:#11293d; --ink:#f8dfbb; --hot:#e76726; --dim:#a0afbd; }
+#search-container { flex-direction:column; gap:34px; background:radial-gradient(ellipse at 50% 100%,#915331 0,transparent 55%),linear-gradient(130deg,#061929,#20465f); padding:30px 20px; }
+#search-container::before { content:'EVERY KEY\A IS AN ACTION SEQUENCE.'; white-space:pre-line; color:#f8dfbb; text-align:center; font:400 clamp(2.8rem,7vw,7rem)/.98 var(--display); letter-spacing:.015em; text-shadow:0 3px #7b4732; }
+#search-container::after { content:'Type to set it off'; color:#d4bfa7; font:400 11px var(--slate); letter-spacing:.2em; text-transform:uppercase; }
+input { border:1px solid #af9579; background:#071b2880; color:#f8dfbb; width:min(640px,88vw); font-size:clamp(16px,2vw,22px); }
+input::placeholder { color:#b3bdc1; }
+input:focus { border-color:#f8dfbb; outline:1px solid #f8dfbb; outline-offset:4px; }
+body.flash #search-container { background:var(--hot); }
+@media(max-width:600px){#search-container{gap:28px}#search-container::before{font-size:3.2rem}.matte{letter-spacing:.08em}.exit-link{font-size:9px;letter-spacing:0}}

@@ -364,3 +364,17 @@ h1 em { color: var(--text-3); font-style: normal; }
   .bubble { animation: none; }
   .typing i { animation: none; }
 }
+
+/* Sunday cancellation club: peach daylight, soft lettering, a phone on the table. */
+:root { --room:#f4c7ae; --room-2:#f9dac8; --room-3:#d5a28c; --text:#4b2c42; --text-2:#755265; --text-3:#866074; --lamp:#813d61; }
+body { background-image:none; }
+header { border-color:#d9a58e; }
+.mark { border:0; border-radius:50%; background:#813d61; color:#ffe8d7; }
+main { grid-template-columns:minmax(0,1fr) auto; max-width:1160px; gap:70px; }
+h1 { font-size:clamp(3rem,6.5vw,6rem); line-height:.97; letter-spacing:-.065em; font-weight:500; }
+h1 em { color:#813d61; }
+.score { padding:18px 0; border:0; border-top:1px solid #d5a28c; border-radius:0; background:transparent; }
+.generate { background:#813d61; color:#fff; }
+.generate:hover { background:#603049; }
+.phone-body { transform:rotate(3deg); box-shadow:18px 28px 0 #d6a18a; }
+@media(max-width:860px){main{grid-template-columns:1fr;gap:36px}.phone-body{transform:none;box-shadow:10px 14px 0 #d6a18a}.lede{display:block}.exit{display:block}}

@@ -189,3 +189,15 @@ html, body {
   .live i { animation: none; }
   .crt { background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, .75) 100%); }
 }
+
+/* Living-room television: plum tube, silver bezel, compact on-screen display. */
+:root { --amber:#c6c0ff; --amber-dim:#b0a5d5; --amber-faint:#6c6185; }
+html,body { background:#160f23; }
+.crt { border:14px solid #49414f; border-radius:38px; box-shadow:inset 0 0 0 3px #100c18,inset 0 0 80px #07040d; background:repeating-linear-gradient(#ffffff03 0 1px,transparent 1px 4px); }
+.hud-top { top:30px; left:32px; right:32px; color:#c6c0ff; }
+.hud { padding:22px 32px; background:linear-gradient(transparent,#160f23e8); border:0; }
+#timer { font-size:clamp(2rem,4vw,3.5rem); font-weight:400; letter-spacing:-.06em; }
+.readout { border-color:#6c6185; }
+#dvd-logo { filter:drop-shadow(0 0 14px currentColor); }
+@media(max-width:600px){.crt{border-width:8px;border-radius:24px}.hud-top{top:22px;left:22px;right:22px}.hud{padding:22px}.channel{font-size:8px}}
+.hud-label,.readout dt,.hint { color:#b0a5d5; }

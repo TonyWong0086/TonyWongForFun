@@ -1,5 +1,5 @@
 /* ============================================================
-   Fun Stuffs — hub behaviour
+   Fun Stuffs â€” hub behaviour
    The catalog lives here: it feeds the grid, the filters and the
    rotating line in the headline, so there is one list to edit.
    `phrase` completes the sentence "This one ___."
@@ -204,12 +204,9 @@
   var grid = $('grid');
 
   grid.innerHTML = PROJECTS.map(function (p) {
-    var attrs = p.stroke
-      ? 'fill="none" stroke="currentColor" stroke-width="1.6"'
-      : 'fill="currentColor"';
     return '<a class="card" href="' + href(p) + '" style="--tint:' + p.tint + '"' +
       ' data-cat="' + p.cat + '" data-search="' + (p.title + ' ' + p.desc + ' ' + p.cat).toLowerCase().replace(/"/g, '') + '">' +
-      '<span class="card-glyph" aria-hidden="true"><svg ' + attrs + ' viewBox="' + (p.viewBox || '0 0 24 24') + '">' + p.icon + '</svg></span>' +
+      '<img class="card-preview" src="assets/previews/' + p.slug + '.webp" alt="" width="720" height="500" loading="lazy" decoding="async">' +
       '<h2 class="card-title">' + p.title + '</h2>' +
       '<p class="card-desc">' + p.desc + '</p>' +
       '<span class="card-foot"><span class="card-cat">' + p.cat + '</span>' + ARROW + '</span>' +

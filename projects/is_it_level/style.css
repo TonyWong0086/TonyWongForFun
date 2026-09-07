@@ -241,3 +241,16 @@ input[type=range]:active::-webkit-slider-thumb {
 @media (prefers-reduced-motion: reduce) {
   #art-frame { transition: none; }
 }
+
+/* Blue exhibition room: a warm painting, a side caption, a freestanding control plinth. */
+:root { --wall:#183a5a; --wall-lit:#295579; --label:#f1e6cc; --label-2:#aec7d9; --frame:#c6a06b; --mat:#f6edd9; --reject:#ffbba7; }
+.gallery-wall { background:radial-gradient(ellipse at 45% 25%,#35698a,#183a5a 70%); box-shadow:inset 0 -100px 100px #0d2b47; }
+.wall-label { border-color:#aec7d9; max-width:220px; }
+.wall-label h1 { font-size:1.65rem; }
+.art-image { background:linear-gradient(180deg,#edc991,#ce9b79 58%,#615444 58.2%,#3d544d); }
+.datum { background:#aec7d960; }
+.status-badge { color:#f1e6cc; background:#0e2b43; }
+.controls { background:#12324d; padding:20px 24px; border-top:1px solid #5e7e98; width:min(440px,90vw); }
+input[type=range]::-webkit-slider-runnable-track { background:#aec7d9; }
+input[type=range]::-moz-range-track { background:#aec7d9; }
+@media(max-width:720px){html,body{overflow:auto}.gallery-wall{min-height:100svh;height:auto;padding:70px 20px 24px;overflow:hidden}.frame-container{--frame-w:220px;padding:0 0 28px}.datum{top:calc(33px + .58 * (var(--frame-w) * 1.25 - 66px))}.controls{position:static;transform:none;flex-shrink:0}.exit-link{position:absolute;z-index:2}}

@@ -179,3 +179,17 @@ h1 {
   .instruction { animation: none; }
   #dino { transition: none; }
 }
+
+/* A pocket LCD game: the disconnected dinosaur gets its own handheld. */
+:root { --page:#ced9a1; --heading:#354d35; --body:#415b3e; --faint:#57704a; --dino:#354d35; --link:#354d35; }
+html,body { background:#c7a0ba; overflow:auto; }
+#game-container { min-height:100svh; height:auto; padding:75px 24px 40px; }
+.error-page { max-width:690px; border:24px solid #ede7de; border-bottom-width:60px; border-radius:30px 30px 90px 30px; padding:30px; background:var(--page); box-shadow:0 12px 0 #aea4a3,0 30px 60px #714e6940,inset 0 0 20px #43593725; }
+.canvas-area { height:180px; background-image:repeating-linear-gradient(0deg,#354d3508 0 1px,transparent 1px 3px); }
+.canvas-area svg path,.canvas-area svg rect:not(#dino-eye) { fill:var(--dino); }
+#dino-eye { fill:var(--page); }
+.error-page h1 { font:400 20px/1.5 var(--pixel); margin-top:30px; }
+.game-meta { font-size:9px; flex-wrap:wrap; }
+.exit-link { color:#493143; }
+.reload { background:#354d35; color:#ced9a1; border-radius:2px; }
+@media(max-width:600px){.error-page{border-width:14px;border-bottom-width:38px;padding:18px;border-bottom-right-radius:60px}.error-page h1{font-size:16px}.err-code{font-size:8px}.speech-bubble{left:45px;width:170px}.error-foot{gap:10px;flex-wrap:wrap}}

@@ -1,24 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&display=swap');
-
-:root { --ink:#161411; --paper:#f1ead8; --red:#9b2c20; --rule:#b8ad94; }
-body.dot-grid { background:var(--paper); background-image:linear-gradient(rgba(22,20,17,.05) 1px,transparent 1px); background-size:100% 32px; color:var(--ink); }
-body > header { background:var(--paper)!important; border-bottom:2px solid var(--ink)!important; backdrop-filter:none!important; }
-body > header nav { height:64px!important; }
-body > header a:first-child { font:500 15px 'DM Mono',monospace; letter-spacing:.08em; }
-main { max-width:1440px!important; padding-top:42px!important; }
-main > header { text-align:left!important; margin-bottom:48px!important; display:grid; grid-template-columns:1fr auto; align-items:end; border-bottom:8px solid var(--ink); padding-bottom:24px; }
+/* Private auction house: oxblood silk, quiet serif type, and illuminated lots. */
+:root { --ink:#302327; --paper:#faf7f3; --wine:#521b30; --gold:#dbc69e; }
+body.dot-grid { background:var(--paper); background-image:none; color:var(--ink); font-family:Inter,Arial,sans-serif; }
+body > header { background:var(--wine)!important; border:0!important; backdrop-filter:none!important; }
+body > header nav { height:72px!important; }
+body > header a,body > header .text-brand { color:var(--gold)!important; }
+#cart-toggle { border:1px solid #ad8795; border-radius:0!important; background:transparent!important; }
+main { max-width:1400px!important; padding-top:0!important; }
+main > header { text-align:center!important; margin:0 -24px 60px!important; padding:65px 24px 72px; background:var(--wine); color:var(--paper); }
 main > header > div { display:none!important; }
-main > header h1 { font:400 clamp(3.4rem,9vw,8.5rem)/.82 'Archivo Black',sans-serif!important; max-width:850px; letter-spacing:-.07em!important; margin:0!important; text-transform:uppercase; }
+main > header h1 { font:400 clamp(3.5rem,7vw,7rem)/1 'Playfair Display',Georgia,serif!important; letter-spacing:-.05em!important; }
 main > header h1 span { font-style:normal!important; }
-main > header > p { grid-column:2; max-width:330px; font:500 12px/1.6 'DM Mono',monospace!important; color:var(--ink)!important; text-transform:uppercase; }
-.price-tag { background:none!important; -webkit-text-fill-color:var(--red)!important; color:var(--red)!important; }
-#product-grid { gap:0!important; border-top:1px solid var(--ink); border-left:1px solid var(--ink); }
-#product-grid > div { border:0!important; border-right:1px solid var(--ink)!important; border-bottom:1px solid var(--ink)!important; border-radius:0!important; box-shadow:none!important; background:rgba(255,255,255,.25)!important; position:relative; min-height:465px; }
-#product-grid > div::before { content:'ACCESSION / PRIVATE SALE'; font:500 9px 'DM Mono',monospace; letter-spacing:.12em; color:var(--red); }
-#product-grid > div:hover { transform:none!important; background:#fff9e9!important; }
-#product-grid h2 { font:400 25px/1.05 'Archivo Black',sans-serif!important; text-transform:uppercase; }
-#product-grid p, #product-grid button { font-family:'DM Mono',monospace!important; }
-#product-grid button { border-radius:0!important; background:var(--ink)!important; text-transform:uppercase; letter-spacing:.08em; }
-.cart-panel, #receipt-modal > div { border-radius:0!important; background:#fff9e9!important; border-left:2px solid var(--ink); }
-@media(max-width:760px){ main > header{display:block} main > header > p{margin-top:22px} #product-grid > div{min-height:auto} }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+main > header > p.price-tag { font:400 12px/1.5 Inter,sans-serif!important; text-transform:uppercase; letter-spacing:.22em; color:var(--gold)!important; -webkit-text-fill-color:var(--gold)!important; }
+main > header > p:last-child { color:#dfcdd3!important; font:400 16px/1.7 Georgia,serif; max-width:510px; }
+main > header p span { color:#c4aab4!important; }
+#product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px!important; }
+#product-grid > div { border:0!important; border-radius:0!important; padding:0 0 32px!important; background:transparent!important; box-shadow:none!important; border-bottom:1px solid #d8c9ca!important; }
+#product-grid > div:hover { transform:none; }
+#product-grid > div > div > div:first-child { height:180px; display:grid; place-items:center; background:#eee5e3; color:var(--wine); }
+#product-grid > div:nth-child(3n+2) > div > div:first-child { background:#e5e9e1; }
+#product-grid > div:nth-child(3n) > div > div:first-child { background:#e9e4ef; }
+#product-grid > div > div > div:first-child svg { width:70px; height:70px; stroke-width:.7; }
+#product-grid h2 { font:400 30px/1.15 'Playfair Display',Georgia,serif!important; color:var(--wine)!important; }
+.price-tag { background:none!important; color:var(--wine)!important; -webkit-text-fill-color:var(--wine)!important; font-family:Georgia,serif; }
+#product-grid button,#checkout-btn { background:var(--wine)!important; border-radius:0!important; box-shadow:none!important; font-weight:500!important; letter-spacing:.05em; }
+#cart-panel,#receipt-modal > div { background:var(--paper)!important; border-radius:0!important; }
+@media(max-width:650px){#product-grid{grid-template-columns:1fr;gap:30px!important}main>header{padding:42px 22px;margin-bottom:32px!important}body>header nav{gap:12px;padding:0 16px!important}body>header nav>div:last-child{gap:12px!important}body>header a{font-size:12px!important}}

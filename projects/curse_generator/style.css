@@ -328,3 +328,23 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .curse-box.is-served::after { animation: none; opacity: .72; transform: rotate(-14deg) scale(1); }
 }
+
+/* Carbon-copy counter: one working form beside the issued pink copy. */
+:root { --manila:#bcc6c7; --form:#f9f7e9; --ink:#253338; --ink-2:#4c5b5f; --ink-3:#67787b; --stamp:#a12845; --rule:#adb7b5; }
+body { background-image:repeating-linear-gradient(0deg,#ffffff0a 0 2px,transparent 2px 5px); }
+.dept-header { background:#253338; color:#f9f7e9; border:0; position:static; }
+.dept-name span,.exit-link { color:#becdce; }
+.dept-seal { color:#f0b8c7; border-color:#f0b8c7; }
+main { max-width:1180px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px 40px; align-items:start; padding-top:48px; }
+.intro { grid-column:1/-1; max-width:720px; }
+h1 { font-family:var(--type); font-size:clamp(2rem,4vw,3.4rem); letter-spacing:-.05em; }
+.form-panel { margin:0; border:0; border-left:18px solid #d8ded9; box-shadow:0 8px 22px #25333812; }
+.curse-box { margin:0; min-height:400px; background:#f2dbe0; border:0; box-shadow:0 8px 22px #25333812; }
+.curse-box::before { height:12px; background:radial-gradient(circle,#bcc6c7 3px,transparent 3.5px) 0 0/18px 12px; }
+.actions { grid-column:2; margin:0; }
+.actions .hint { width:100%; margin-top:8px; }
+.ecard-mode { background:#fff0f2; border:6px double var(--stamp); }
+@media(max-width:760px){main{grid-template-columns:1fr;gap:22px;padding-top:30px}.intro,.actions{grid-column:1}.curse-box{min-height:340px}.categories{grid-template-columns:repeat(2,1fr)}}
+.notice-head,.notice-foot { letter-spacing:.08em; flex-wrap:wrap; gap:8px; }
+.cat-btn { min-width:0; overflow-wrap:anywhere; }
+.curse-box { overflow:hidden; }

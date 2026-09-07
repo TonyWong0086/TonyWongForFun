@@ -275,3 +275,18 @@ h1 {
   html { scroll-behavior: auto; }
   .spinner span { animation-duration: 3s; animation-timing-function: linear; }
 }
+
+/* Managed workstation recovery: charcoal screen and a restrained installation rail. */
+:root { --corp:#20252c; --corp-deep:#171b21; }
+.update-screen { background:#20252c; }
+.update-screen h1 { font-weight:300; font-size:clamp(1.7rem,3vw,2.5rem); letter-spacing:-.03em; }
+.progress-bar-container { width:min(420px,78vw); height:4px; background:#4c5665; border:0; border-radius:2px; }
+.progress-fill { background:#8bbcff; }
+.percent { font-size:14px; color:#b7c7dc; }
+.status-text,.dont { color:#aab5c3; }
+.update-foot { color:#8996a8; }
+.truth { background:#e3eaf1; color:#263345; }
+.truth-inner { max-width:1000px; }
+.truth h2 { font-size:clamp(2.5rem,5vw,5rem); max-width:850px; }
+.truth .eyebrow,.truth-lede,.specs dt,.return { color:#4e637d; }
+.specs { border-color:#adbbc9; }

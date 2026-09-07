@@ -1,14 +1,31 @@
-/* style.css */
-/* 
-    This file has been mostly superseded by Tailwind CSS in index.html.
-    It remains strictly for highly custom logic animations that are cumbersome in inline tailwind classes.
-*/
-
-.hidden {
-    display: none !important;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+/* Sports broadcast: a turf field, fixture typography, and two competing lineups. */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&display=swap');
+body.dot-grid { background:#173d32; background-image:repeating-linear-gradient(90deg,transparent 0 119px,#ffffff08 119px 120px); color:#fff; }
+body > header { background:#102a23!important; border-bottom:1px solid #54776a!important; backdrop-filter:none!important; }
+body > header nav { height:60px!important; }
+body > header a, body > header .text-brand { color:#f9edb4!important; }
+main { max-width:1280px!important; padding-top:48px!important; display:grid; grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr); gap:48px; align-items:start; }
+main > header { text-align:left!important; position:sticky; top:104px; margin:0!important; }
+main > header > div { background:#f9edb4!important; color:#173d32!important; border:0!important; border-radius:50%!important; width:110px!important; height:110px!important; }
+main h1 { font:800 clamp(3.7rem,6vw,6.8rem)/.86 'Barlow Condensed',Impact,sans-serif!important; text-transform:uppercase; }
+main h1 span { color:#f9edb4!important; background:none!important; -webkit-text-fill-color:#f9edb4; }
+main > header p { color:#c6d9cc!important; font-size:16px!important; }
+#goose-form > div { background:#f9faf3!important; border:0!important; border-radius:4px!important; box-shadow:none!important; padding:28px!important; margin-bottom:16px!important; }
+#goose-form h2 { font:600 30px 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+#goose-form input:not([type=radio]):not([type=range]),#goose-form select { border-radius:0!important; border:1px solid #bac9bb; }
+.weapon-card .card-content { padding:16px!important; border-radius:0!important; background:#edf1e8!important; }
+.weapon-card input:checked + .card-content { border-color:#226449!important; background:#d9ebc7!important; box-shadow:inset 4px 0 #226449!important; }
+.weapon-card input:focus-visible + .card-content { outline:3px solid #226449; outline-offset:2px; }
+#calculate-btn { background:#eea339!important; color:#142d24!important; border-radius:0!important; font:800 24px 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+#battle-report { grid-column:1/-1; margin-top:0!important; }
+#battle-report > div { border:0!important; border-radius:0!important; background:#f9edb4!important; box-shadow:none!important; }
+#goose-count { color:#173d32!important; font-family:'Barlow Condensed',sans-serif!important; filter:none!important; }
+@media(max-width:800px){main{grid-template-columns:1fr;gap:28px;padding:32px 18px!important}main>header{position:static}main h1{font-size:4rem!important}main>header>div{float:right;width:70px!important;height:70px!important}#goose-form>div{padding:20px!important}}
+.hidden { display:none!important; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+#fitness { background:linear-gradient(to right,#226449 0%,#226449 var(--fill,50%),#d6dfd0 var(--fill,50%),#d6dfd0 100%); }
+#fitness::-webkit-slider-thumb { border-color:#226449; box-shadow:none; }
+#fitness::-moz-range-thumb { border-color:#226449; box-shadow:none; }
+#fitness::-moz-range-progress { background:#226449; }
+.slider-steps span.active,#fitness-val { color:#226449!important; }
+#fitness-val { background:#d9ebc7!important; }

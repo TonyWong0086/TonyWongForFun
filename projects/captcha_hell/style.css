@@ -427,3 +427,24 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .glitch-text { animation: none; }
 }
+
+/* An airport self-service kiosk: white molded housing on a cobalt concourse. */
+:root { --bone:#f9fbff; --bone-2:#e8edf7; --ink:#182951; --ink-2:#4d6185; --ink-3:#667c9f; --teal:#205bdc; --teal-deep:#143ca0; --line:#cad7ee; }
+body { background:#1544b2; }
+.authority { background:#10358c; background-image:none; padding-block:18px; }
+.authority-state { color:#b7d3ff; }
+#game-container { max-width:1040px; align-items:center; gap:65px; padding-top:70px; }
+.terminal-copy { color:#fff; }
+.terminal-copy .eyebrow,.terminal-copy .lede { color:#c8daff; }
+h1 { font-weight:400; font-size:clamp(2.8rem,5vw,4.5rem); letter-spacing:-.045em; }
+.stages { border-color:#7093de; }
+.stages li { color:#bed0f5; border-color:#7093de; }
+.stages li.active,.stages li.active::before { color:#fff; }
+.terminal-shell { border:8px solid #dce5f6; border-radius:28px; overflow:hidden; box-shadow:0 30px 60px #09256c60; }
+.terminal-top { padding:16px; border:0; }
+.captcha-box { min-height:270px; }
+#checkbox,.verify-button,.play-button { border-radius:7px; border-color:#b8c8e7; }
+#checkbox { background:#205bdc; color:#fff; padding:18px; }
+.mrz { background:#e8edf7; border:0; padding:20px; color:#284878; }
+#status-log,.mrz-line,.mrz small { color:#395984; }
+@media(max-width:860px){#game-container{padding-top:32px;gap:30px}.terminal-copy .lede{font-size:14px}.captcha-box{min-height:220px}}

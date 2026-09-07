@@ -96,12 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const declineBtn = document.querySelector('.decline-btn');
     declineBtn.addEventListener('click', () => {
         const originalText = declineBtn.textContent;
-        declineBtn.textContent = "Error: Invalid Choice";
-        declineBtn.style.color = "#ef4444";
-        
+        declineBtn.textContent = "Not a valid choice";
+        declineBtn.classList.add('is-refused');
+
         setTimeout(() => {
             declineBtn.textContent = originalText;
-            declineBtn.style.color = "#9ca3af";
+            declineBtn.classList.remove('is-refused');
         }, 1500);
     });
 

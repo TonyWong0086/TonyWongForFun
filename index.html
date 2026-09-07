@@ -2,289 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Fun Stuffs — TonyWong0086</title>
-    <meta name="description" content="A collection of ridiculous web toys, built seriously with vanilla JS." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fun Stuffs — 18 small websites</title>
+  <meta name="description"
+    content="Eighteen small websites, each one doing exactly one silly thing. Built in plain HTML, CSS and JavaScript.">
+  <meta name="color-scheme" content="light dark">
 
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+  <!-- Apply the saved theme before paint so there is no flash. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('fx-theme');
+        var dark = saved ? saved === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
 
-    <!-- Apply saved theme before paint to avoid a flash -->
-    <script>
-        (function () {
-            try {
-                var s = localStorage.getItem('fx-theme');
-                var dark = s === 'dark';
-                if (dark) document.documentElement.classList.add('dark');
-            } catch (e) {}
-        })();
-    </script>
-
-    <!-- Shared design tokens -->
-    <link rel="stylesheet" href="assets/theme.css">
-    <link rel="stylesheet" href="assets/hub-page.css">
-
-    <!-- Tailwind (utility classes for layout only; colors come from CSS vars below) -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } },
-        };
-    </script>
-
-    <style>
-        /* Theme variables — flipped by the dark/light toggle */
-        :root {
-            --bg: #ffffff;
-            --grid: #e5e7eb;
-            --text: #0f172a;
-            --muted: #64748b;
-            --faint: #94a3b8;
-            --card: #ffffff;
-            --card-line: #e2e8f0;
-            --chip: #f1f5f9;
-            --chip-text: #64748b;
-            --header: rgba(255, 255, 255, .8);
-        }
-
-        html.dark {
-            --bg: #0b0f1a;
-            --grid: #1e293b;
-            --text: #f1f5f9;
-            --muted: #94a3b8;
-            --faint: #64748b;
-            --card: #0f172a;
-            --card-line: #1e293b;
-            --chip: #1e293b;
-            --chip-text: #cbd5e1;
-            --header: rgba(11, 15, 26, .8);
-        }
-
-        body {
-            background-color: var(--bg);
-            background-image: radial-gradient(var(--grid) 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: var(--text);
-            transition: background-color .4s var(--fx-ease), color .4s var(--fx-ease);
-        }
-
-        .site-header { background: var(--header); }
-
-        .toy-card {
-            background: var(--card);
-            border: 1px solid var(--card-line);
-            transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease),
-                        border-color .3s var(--fx-ease), opacity .25s var(--fx-ease);
-        }
-        .toy-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--fx-shadow-lg);
-        }
-        .toy-card .chip { background: var(--chip); color: var(--chip-text); }
-        .toy-card .title { color: var(--text); }
-        .toy-card:hover .title { color: var(--fx-brand-light); }
-
-        /* Filtered-out cards animate away */
-        .toy-card.hidden-card { display: none; }
-
-        .tag-pill {
-            border: 1px solid var(--card-line);
-            color: var(--muted);
-            background: var(--card);
-            transition: all .2s var(--fx-ease);
-        }
-        .tag-pill:hover { border-color: var(--fx-brand-light); color: var(--fx-brand); }
-        .tag-pill.active {
-            background: var(--fx-brand);
-            border-color: var(--fx-brand);
-            color: #fff;
-        }
-
-        #search {
-            background: var(--card);
-            border: 1px solid var(--card-line);
-            color: var(--text);
-        }
-        #search::placeholder { color: var(--faint); }
-
-        .icon-toggle {
-            border: 1px solid var(--card-line);
-            background: var(--card);
-            color: var(--muted);
-        }
-        .icon-toggle:hover { color: var(--fx-brand); border-color: var(--fx-brand-light); }
-
-        /* Staggered card entrance */
-        @keyframes card-rise {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .toy-card { animation: card-rise .5s var(--fx-ease) both; }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="assets/hub-page.css">
 </head>
 
-<body class="min-h-screen font-sans selection:bg-indigo-500/20">
-    <!-- Header -->
-    <header class="site-header sticky top-0 z-50 backdrop-blur-md border-b" style="border-color: var(--card-line)">
-        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a class="hub-brand" href="index.html" aria-label="Fun Stuffs home">
-                <span class="hub-brand-mark">FS</span>
-                <span class="hub-brand-copy"><strong>Fun Stuffs</strong><small>Independent web toy collection</small></span>
-            </a>
-            <div class="flex items-center gap-3 md:gap-6">
-                <a class="text-sm font-medium hover:opacity-70 transition-opacity" style="color: var(--muted)"
-                    href="physics.html">Gravity Chamber</a>
-                <button id="theme-toggle" class="icon-toggle w-10 h-10 rounded-xl flex items-center justify-center transition-all"
-                    aria-label="Toggle dark mode" title="Toggle dark mode">
-                    <svg class="w-5 h-5 sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                    <svg class="w-5 h-5 moon hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
+<body>
+  <a class="skip-link" href="#collection">Skip to the collection</a>
 
-    <main class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <!-- Hero -->
-        <section class="text-center mb-14 md:mb-20">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">Fun<br>Stuffs</h1>
-            <p class="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style="color: var(--muted)">
-                A playable cabinet of ridiculous ideas, engineered with unreasonable care and plain old JavaScript.
-            </p>
-        </section>
+  <header class="topbar">
+    <nav class="topbar-inner shell" aria-label="Site">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">FS</span>
+        <span class="brand-name">Fun Stuffs</span>
+      </a>
+      <div class="topbar-actions">
+        <a class="topbar-link" href="physics.html">Gravity room</a>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path stroke-linecap="round"
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+          <svg class="icon-moon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
 
-        <!-- Controls: search + tag filters -->
-        <section class="mb-10 flex flex-col gap-5">
-            <div class="relative max-w-md mx-auto w-full">
-                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--faint)" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.3-4.3"/></svg>
-                <input id="search" type="search" autocomplete="off" placeholder="Search the chaos…"
-                    class="w-full pl-12 pr-4 py-3 rounded-2xl text-base focus:outline-none focus:ring-2 focus:ring-indigo-400/40 transition-all" />
-            </div>
-            <div id="tag-filters" class="flex flex-wrap justify-center gap-2"></div>
-            <p id="count" class="text-center text-sm" style="color: var(--faint)"></p>
-        </section>
+  <main>
+    <section class="hero shell">
+      <h1 class="hero-title">Eighteen small websites.</h1>
+      <p class="hero-rotate">This one <a class="rotator" id="rotator" href="projects/goose_combat/index.html"><span
+            id="rotator-phrase">counts the geese you&rsquo;d beat</span></a><span aria-hidden="true">.</span></p>
+      <p class="hero-credit" id="rotator-credit">The Goose Combat Simulator</p>
 
-        <!-- Card grid (rendered from data) -->
-        <section id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"></section>
-        <p id="empty" class="hidden text-center py-20 text-lg" style="color: var(--faint)">No toys match that. Try less specific chaos.</p>
-    </main>
+      <p class="hero-note">Every one of them is a single page that takes one small idea completely seriously. Nothing to
+        install, no account, no build step — open one and it runs.</p>
 
-    <footer class="max-w-7xl mx-auto px-6 py-12 text-center text-sm" style="color: var(--faint)">
-        <p><span id="total"></span> toys · Open Source on GitHub · Built with Vanilla JS</p>
-    </footer>
+      <p class="hero-action">
+        <button class="btn btn-primary" id="random" type="button">Open one at random</button>
+      </p>
+    </section>
 
-    <script>
-        /* ---- Project catalog (single source of truth) ---- */
-        const PROJECTS = [
-            { slug: 'goose_combat',         title: 'The Goose Combat Simulator',          tag: 'Math Engine',          accent: ['#fff7ed', '#f97316'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-1.5 0-4 1-4 4s2 4 4 5c2 1 5 .5 5-2s-2-3-4-3m-1 8v4m-3-1h6"/>', stroke: true },
-            { slug: 'curse_generator',      title: 'Department of Minor Misfortune',      tag: 'Cosmic Bureaucracy',   accent: ['#fff1e8', '#d9472f'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>', stroke: true },
-            { slug: 'window_shopper',       title: 'The Impossible Lots',                 tag: 'Private Acquisitions', accent: ['#f1ead8', '#9b2c20'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/>', stroke: true },
-            { slug: 'password_checker',     title: 'Credential Judgment Unit',            tag: 'Hostile Hardware',     accent: ['#dce5d2', '#243526'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>', stroke: true },
-            { slug: 'reply_all_panic',      title: 'Reply-All Incident Console',          tag: 'Corporate Emergency', accent: ['#fff0e8', '#d92d20'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>', stroke: true },
-            { slug: 'inconvenience_store',  title: 'OPEN 24/7-ish',                       tag: 'Hostile Retail',        accent: ['#fff4a8', '#e8392f'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72"/>', stroke: true },
-            { slug: 'break_in_simulator',   title: 'Operation: Spare Key',                tag: 'Budget Espionage',     accent: ['#d7e0d3', '#355b46'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247"/>', stroke: true },
-            { slug: 'useless_talent_agency',title: 'Oddly Specific Talent Roster',         tag: 'Open Casting Call',    accent: ['#f7cceb', '#712a78'], icon: '<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5V13.2a3.26 3.26 0 0 0-3.26-3.26c-1.1 0-2.02.58-2.5 1.45V10.2h-2.9v8.3h2.9v-4.72c0-.46.18-.9.58-1.2s.93-.45 1.34-.45c.75 0 1.29.54 1.29 1.33v5.04h2.95M7.14 18.5v-8.3H4.2v8.3h2.94M5.67 5.92A1.66 1.66 0 0 0 4 7.58a1.66 1.66 0 0 0 1.67 1.66A1.66 1.66 0 0 0 7.33 7.58A1.66 1.66 0 0 0 5.67 5.92z"/>', stroke: false },
-            { slug: 'captcha_hell',         title: 'Human Verification Terminal',         tag: 'Identity Crisis',      accent: ['#e1f5f2', '#008f86'], icon: '<rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="14"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect>', stroke: true },
-            { slug: 'button_cascade',       title: 'Containment Button',                   tag: 'Containment Failure',  accent: ['#ffe9e6', '#e42d24'], icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="3"/>', stroke: false },
-            { slug: 'flaky_friend',         title: 'Cancellation Studio',                 tag: 'Social Avoidance',     accent: ['#eeeaff', '#6246ea'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>', stroke: true },
-            { slug: 'cookie_trap',          title: 'Cookie Consent Trap',                 tag: 'Corporate Parody',     accent: ['#fffbeb', '#f59e0b'], icon: '<path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.5-9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 16a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-3-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>', stroke: false },
-            { slug: 'decoy_update',         title: 'Enterprise Maintenance Console',      tag: 'Productivity Alibi',   accent: ['#e7edf2', '#2d73d5'], icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>', stroke: false },
-            { slug: 'passive_notepad',      title: 'Helpful Editor',                       tag: 'Editorial Sabotage',   accent: ['#ffe7f0', '#2458ff'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>', stroke: true },
-            { slug: 'dino_defeatist',       title: 'Dino Defeatist',                      tag: 'Social Engineering',   accent: ['#f1f5f9', '#334155'], icon: '<path d="M22 2h14v2h2v2h2v10h-2v2h-8v2h2v2h10v2h2v12h-2v2h-2v2h-2v2h-2v-2h-2v-4h-2v2h-2v2h-4v-2h-2v-2h-2v-12h2v-2h2v-2h2v-2H6v-2H4v-2H2v-10h2V8h2V6h2V4h14v2z"/>', stroke: false, viewBox: '0 0 44 47' },
-            { slug: 'dvd_engine',           title: 'DVD Corner Engine',                   tag: 'Physics Engine',       accent: ['#f1f5f9', '#1e293b'], icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14h-4v-8h8v8h-4z"/>', stroke: false },
-            { slug: 'is_it_level',          title: 'Is It Level?',                        tag: 'Precision Agitator',   accent: ['#f5f5f4', '#57534e'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"/>', stroke: true },
-            { slug: 'michael_bay_input',    title: 'Michael Bay Input',                   tag: 'Visual Overload',      accent: ['#ffedd5', '#ea580c'], icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>', stroke: true },
-        ];
+    <section class="collection shell" id="collection" aria-label="The collection">
+      <div class="controls">
+        <div class="filters" id="filters" role="group" aria-label="Filter by kind"></div>
+        <div class="search-field">
+          <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path stroke-linecap="round" d="M21 21l-4.3-4.3" />
+          </svg>
+          <input id="search" type="search" placeholder="Search" aria-label="Search the collection" autocomplete="off">
+          <kbd class="search-key" aria-hidden="true">/</kbd>
+        </div>
+      </div>
 
-        const ARROW = '<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>';
+      <p class="result-count" id="count" aria-live="polite"></p>
 
-        function cardHTML(p, i) {
-            const vb = p.viewBox || '0 0 24 24';
-            const svgAttrs = p.stroke
-                ? 'fill="none" stroke="currentColor" stroke-width="2"'
-                : 'fill="currentColor"';
-            return `
-            <a href="projects/${p.slug}/index.html"
-               class="toy-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group cursor-pointer shadow-sm block focus:outline-none focus:ring-2 focus:ring-indigo-400/50"
-               data-title="${p.title.toLowerCase()}" data-tag="${p.tag.toLowerCase()}" style="animation-delay:${i * 35}ms">
-                <div>
-                    <div class="mb-6 w-12 h-12 rounded-2xl flex items-center justify-center"
-                         style="background:${p.accent[0]};color:${p.accent[1]}">
-                        <svg class="w-6 h-6" ${svgAttrs} viewBox="${vb}">${p.icon}</svg>
-                    </div>
-                    <h2 class="title text-xl font-bold mb-6 transition-colors">${p.title}</h2>
-                </div>
-                <div class="flex items-center justify-between pt-4 border-t" style="border-color: var(--card-line)">
-                    <span class="chip px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full">${p.tag}</span>
-                    <div class="group-hover:translate-x-1 transition-all" style="color: var(--faint)">${ARROW}</div>
-                </div>
-            </a>`;
-        }
+      <div class="grid" id="grid"></div>
 
-        const grid = document.getElementById('grid');
-        grid.innerHTML = PROJECTS.map(cardHTML).join('');
-        document.getElementById('total').textContent = PROJECTS.length;
+      <div class="empty" id="empty" hidden>
+        <p>Nothing matches that.</p>
+        <button class="btn btn-quiet" id="clear" type="button">Clear search and filters</button>
+      </div>
+    </section>
+  </main>
 
-        /* ---- Tag filters ---- */
-        const tags = ['All', ...[...new Set(PROJECTS.map(p => p.tag))].sort()];
-        const tagWrap = document.getElementById('tag-filters');
-        let activeTag = 'All';
-        tagWrap.innerHTML = tags.map(t =>
-            `<button class="tag-pill px-4 py-2 rounded-full text-sm font-medium${t === 'All' ? ' active' : ''}" data-tag="${t}">${t}</button>`
-        ).join('');
+  <footer class="footer">
+    <div class="footer-inner shell">
+      <p>Fun Stuffs — 18 small websites by TonyWong0086.</p>
+      <p>Plain HTML, CSS and JavaScript. <a href="physics.html">Gravity room</a></p>
+    </div>
+  </footer>
 
-        const search = document.getElementById('search');
-        const countEl = document.getElementById('count');
-        const emptyEl = document.getElementById('empty');
-
-        function applyFilters() {
-            const q = search.value.trim().toLowerCase();
-            let shown = 0;
-            grid.querySelectorAll('.toy-card').forEach(card => {
-                const matchesTag = activeTag === 'All' || card.dataset.tag === activeTag.toLowerCase();
-                const matchesQuery = !q || card.dataset.title.includes(q) || card.dataset.tag.includes(q);
-                const visible = matchesTag && matchesQuery;
-                card.classList.toggle('hidden-card', !visible);
-                if (visible) shown++;
-            });
-            countEl.textContent = `Showing ${shown} of ${PROJECTS.length}`;
-            emptyEl.classList.toggle('hidden', shown !== 0);
-        }
-
-        tagWrap.addEventListener('click', e => {
-            const btn = e.target.closest('.tag-pill');
-            if (!btn) return;
-            activeTag = btn.dataset.tag;
-            tagWrap.querySelectorAll('.tag-pill').forEach(b => b.classList.toggle('active', b === btn));
-            applyFilters();
-        });
-        search.addEventListener('input', applyFilters);
-        // "/" focuses search, Esc clears
-        document.addEventListener('keydown', e => {
-            if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
-            if (e.key === 'Escape' && document.activeElement === search) { search.value = ''; applyFilters(); search.blur(); }
-        });
-        applyFilters();
-
-        /* ---- Dark / light theme (persisted) ---- */
-        const root = document.documentElement;
-        const toggle = document.getElementById('theme-toggle');
-        const sun = toggle.querySelector('.sun');
-        const moon = toggle.querySelector('.moon');
-        function setTheme(dark) {
-            root.classList.toggle('dark', dark);
-            sun.classList.toggle('hidden', dark);
-            moon.classList.toggle('hidden', !dark);
-            try { localStorage.setItem('fx-theme', dark ? 'dark' : 'light'); } catch (e) {}
-        }
-        const saved = (() => { try { return localStorage.getItem('fx-theme'); } catch (e) { return null; } })();
-        setTheme(saved === 'dark');
-        toggle.addEventListener('click', () => setTheme(!root.classList.contains('dark')));
-    </script>
-    <script src="assets/hub-page.js"></script>
+  <script src="assets/hub-page.js" defer></script>
 </body>
 
 </html>

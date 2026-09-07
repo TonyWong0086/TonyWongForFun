@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function flashNearMiss() {
         nearMisses++;
         nearDisplay.textContent = nearMisses;
-        celebration.textContent = 'SO CLOSE';
+        celebration.textContent = 'So close';
         celebration.classList.add('show');
         setTimeout(() => {
             celebration.classList.remove('show');
-            celebration.textContent = 'CORNER HIT!';
+            celebration.textContent = 'Corner hit';
         }, 900);
     }
 

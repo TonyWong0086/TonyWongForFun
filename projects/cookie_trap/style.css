@@ -1,0 +1,230 @@
+/* ============================================================
+   Cookie Consent — a calm little tea shop with a compliance
+   widget bolted to its face. The site is warm and serif; the
+   modal is cold and system-font, because it came from a vendor.
+   ============================================================ */
+
+:root {
+  --cream: #f7f5ef;
+  --sage: #6e7f5e;
+  --sage-deep: #4f5c43;
+  --site-ink: #2a2e26;
+  --site-mute: #7d8175;
+  --modal-ink: #111318;
+  --modal-body: #5c6070;
+  --modal-line: #e3e5ea;
+  --serif: 'Fraunces', Georgia, serif;
+  --system: -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--cream);
+  font-family: var(--system);
+}
+
+h1, h2, p { margin: 0; }
+
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+/* ---- The site you cannot reach ----------------------------- */
+
+.site-preview {
+  height: 100%;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  color: var(--site-ink);
+  /* Legible enough to want. Never usable. */
+  filter: blur(3px);
+  opacity: .75;
+  user-select: none;
+  pointer-events: none;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(42, 46, 38, .14);
+}
+.brand { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; letter-spacing: -.01em; }
+.site-nav nav { display: flex; gap: 1.6rem; color: var(--site-mute); font-size: .875rem; }
+.bag { margin-left: auto; color: var(--site-mute); font-size: .875rem; }
+
+.site-hero { max-width: 46rem; padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+.site-eyebrow {
+  color: var(--sage);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.site-hero h1 {
+  margin-top: 1.1rem;
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+.site-lede {
+  max-width: 32rem;
+  margin-top: 1.2rem;
+  color: var(--site-mute);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.site-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 3vw, 2rem); }
+.site-grid article { display: flex; flex-direction: column; gap: .55rem; }
+.swatch { height: clamp(110px, 18vh, 190px); border-radius: 4px; }
+.swatch-a { background: linear-gradient(160deg, #b98d5c, #8c6033); }
+.swatch-b { background: linear-gradient(160deg, #9fb27c, #6e7f5e); }
+.swatch-c { background: linear-gradient(160deg, #e8dcc0, #c9b78e); }
+.site-grid h2 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
+.site-grid p { color: var(--site-mute); font-size: .8125rem; }
+.price { font-size: .8125rem; font-weight: 600; }
+
+/* ---- The widget -------------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(20, 22, 18, .55);
+}
+
+.cookie-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  min-height: 330px;
+  padding: 1.75rem 1.75rem 1.4rem;
+  border: 1px solid var(--modal-line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--modal-ink);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .5);
+}
+
+.modal-head { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem; }
+.cookie-icon { display: grid; place-items: center; color: #b8860b; }
+.modal-kicker {
+  color: var(--modal-body);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.cookie-modal h2 { font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; }
+
+.modal-body {
+  margin-top: .8rem;
+  color: var(--modal-body);
+  font-size: .8125rem;
+  line-height: 1.65;
+}
+
+#btn-container { display: flex; align-items: center; gap: .75rem; height: 42px; margin-top: 1.5rem; }
+
+.decline-btn {
+  padding: .65rem 1.15rem;
+  border: 1px solid var(--modal-line);
+  border-radius: 4px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  font-family: var(--system);
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: color .2s ease, border-color .2s ease;
+}
+.decline-btn.is-refused { border-color: #e6b0aa; color: #c0392b; }
+
+/* Static-positioned so the runaway button measures against the modal. */
+#accept-wrapper { display: inline-block; width: 112px; height: 42px; }
+
+.accept-btn {
+  position: absolute;
+  padding: .65rem 1.15rem;
+  border: 0;
+  border-radius: 4px;
+  background: var(--modal-ink);
+  color: #fff;
+  font-family: var(--system);
+  font-size: .8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .05s linear, padding .1s, font-size .1s;
+}
+
+.shake { animation: shake .2s infinite; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.modal-fine {
+  margin-top: 1.6rem;
+  padding-right: 9rem; /* clears the vendor badge */
+  color: #9ca3af;
+  font-size: .625rem;
+  line-height: 1.6;
+}
+.modal-fine a { color: inherit; }
+#evasion-note { display: block; margin-top: .4rem; color: #c2c6cf; }
+
+.cmp-badge {
+  position: absolute;
+  right: 1.75rem;
+  bottom: 1.4rem;
+  color: #c2c6cf;
+  font-size: .5625rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ---- Exit --------------------------------------------------- */
+
+.exit-link {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 200;
+  color: rgba(255, 255, 255, .7);
+  font-size: .625rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.exit-link::before { content: '\2190 '; }
+.exit-link:hover { color: #fff; }
+
+/* ---- Small screens ----------------------------------------- */
+
+@media (max-width: 720px) {
+  .site-nav nav, .bag { display: none; }
+  .site-grid { grid-template-columns: 1fr; }
+  .site-grid article:nth-child(n+2) { display: none; }
+  .cookie-modal { min-height: 380px; padding: 1.4rem; }
+  .modal-fine { padding-right: 0; }
+  .cmp-badge { position: static; display: block; margin-top: .8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shake { animation: none; }
+}

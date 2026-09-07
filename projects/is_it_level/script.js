@@ -53,15 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? snarks[idx]
                     : (window.FX ? FX.pick(snarks, lastSnark) : snarks[Math.floor(Math.random() * snarks.length)]);
                 statusBadge.textContent = lastSnark;
-                statusBadge.style.color = "#ef4444";
-                statusBadge.style.background = "#fee2e2";
+                statusBadge.classList.add('is-rejected');
 
                 setTimeout(() => {
                     isSabotaging = false;
                     frame.style.transition = 'transform 0.05s ease-out';
-                    statusBadge.textContent = "Adjustment Required";
-                    statusBadge.style.color = "#8a847a";
-                    statusBadge.style.background = "rgba(255,255,255,0.5)";
+                    statusBadge.textContent = "Adjustment required";
+                    statusBadge.classList.remove('is-rejected');
                 }, 400);
             }
         } else {
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Mocking tooltips
         if (Math.abs(deg) < 1) {
-            statusBadge.textContent = "Precision Alignment...";
+            statusBadge.textContent = "Precision alignment…";
         }
     }
 

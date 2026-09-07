@@ -1,0 +1,191 @@
+/* ============================================================
+   DVD Corner Engine — a monitoring station, amber phosphor.
+   The real subject is the waiting, so the vigil clock is the
+   largest thing on the screen and the logo is just the feed.
+   ============================================================ */
+
+:root {
+  --amber: #ffb000;
+  --amber-dim: rgba(255, 176, 0, .45);
+  --amber-faint: rgba(255, 176, 0, .22);
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: var(--amber);
+  font-family: var(--mono);
+}
+
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+/* ---- The tube ---------------------------------------------- */
+
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, .75) 100%);
+}
+
+/* ---- Top rail ---------------------------------------------- */
+
+.hud-top {
+  position: fixed;
+  z-index: 300;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.15rem clamp(1rem, 4vw, 1.75rem);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.live { display: inline-flex; align-items: center; gap: .45rem; color: var(--amber); }
+.live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: .3; } }
+
+.channel { color: var(--amber-faint); }
+
+.exit-link {
+  margin-left: auto;
+  color: var(--amber-dim);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.exit-link::before { content: '\2190 '; }
+.exit-link:hover { color: var(--amber); }
+
+/* ---- The feed ---------------------------------------------- */
+
+#dvd-logo {
+  position: absolute;
+  z-index: 100;
+  width: 150px;
+  height: 70px;
+  user-select: none;
+  transition: color .1s, transform .4s cubic-bezier(.17, .89, .32, 1.49);
+  filter: drop-shadow(0 0 18px currentColor);
+}
+
+/* ---- Instrument panel -------------------------------------- */
+
+.hud {
+  position: fixed;
+  z-index: 300;
+  left: clamp(1rem, 4vw, 1.75rem);
+  bottom: clamp(1rem, 4vw, 1.75rem);
+  pointer-events: none;
+}
+
+.hud-label {
+  display: block;
+  color: var(--amber-faint);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+/* The number that admits what you are actually doing here. */
+#timer {
+  display: block;
+  margin-top: .35rem;
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -.04em;
+  text-shadow: 0 0 26px rgba(255, 176, 0, .35);
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2.25rem;
+  max-width: 320px;
+  margin: 1.4rem 0 0;
+  border-top: 1px solid var(--amber-faint);
+}
+.readout div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .4rem 0;
+  border-bottom: 1px solid rgba(255, 176, 0, .12);
+}
+.readout dt { color: var(--amber-faint); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase; }
+.readout dd {
+  margin: 0;
+  color: var(--amber-dim);
+  font-size: .6875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin: 1.1rem 0 0;
+  color: rgba(255, 176, 0, .16);
+  font-size: .625rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* ---- The payoff -------------------------------------------- */
+
+#celebration {
+  position: fixed;
+  z-index: 350;
+  left: 50%;
+  top: 50%;
+  color: var(--amber);
+  font-size: clamp(2.2rem, 9vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  text-shadow: 0 0 50px rgba(255, 176, 0, .6);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.5);
+  pointer-events: none;
+}
+#celebration.show { animation: celebrate 2s cubic-bezier(.17, .89, .32, 1.49) forwards; }
+
+@keyframes celebrate {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+  20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* ---- Small screens ----------------------------------------- */
+
+@media (max-width: 640px) {
+  .channel { display: none; }
+  .readout { grid-template-columns: 1fr; max-width: 220px; }
+  .hint { display: none; }
+  #dvd-logo { width: 110px; height: 52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live i { animation: none; }
+  .crt { background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, .75) 100%); }
+}

@@ -1,1 +1,105 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Human Verification Terminal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="style.css"></head><body><header class="terminal-header"><a href="../../index.html">HV–86</a><span>Human Verification Authority</span><strong>Connection secure*</strong></header><main id="game-container"><section class="terminal-copy"><span>Identity checkpoint</span><h1>Prove you’re<br>probably human.</h1><p>Complete a short, reasonable verification procedure. The procedure may become less reasonable without notice.</p><ol><li class="active">Presence</li><li>Perception</li><li>Listening</li><li>Emotion</li></ol></section><section class="terminal-shell"><div class="terminal-top"><span>SESSION 4F8–B</span><span id="loop-counter">Verification attempts: 0</span></div><div id="widget" class="captcha-box"><div id="step-0" class="start-step"><div><span class="step-label">Stage 01 / Presence</span><h2>Confirm that you are not a robot.</h2></div><button onclick="startChallenge()" id="checkbox"><span id="check-icon"></span>Begin verification</button></div><div id="step-grid" class="hidden"><span class="step-label">Stage 02 / Perception</span><h2>Select every square containing</h2><p id="grid-prompt">a sense of lingering regret</p><div id="captcha-grid"></div><button onclick="verifyGrid()" class="verify-button">Verify selection</button></div><div id="step-audio" class="hidden"><span class="step-label">Stage 03 / Listening</span><h2>Transcribe the distorted maritime recording.</h2><div class="audio-row"><button onclick="playDistortedAudio()" class="play-button">▶ Play</button><div id="audio-waveform"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><input id="audio-input" placeholder="Enter what you think you heard"><button onclick="verifyAudio()" class="verify-button">Process audio</button></div></div><div class="terminal-log"><span id="status-log">[WAITING FOR HUMAN INPUT...]</span><small>*Secure is a marketing term.</small></div></section></main><div id="essay-modal" class="essay-modal hidden"><section><span class="step-label danger">Stage 04 / Emotion</span><h2>Malicious activity detected.</h2><p>Define “love” in exactly 500 words without using the letter E.</p><textarea id="essay-input" placeholder="Begin typing your soul’s confession..."></textarea><div><span id="word-count">Words: 0 / 500</span><button onclick="submitHumanityEssay()">Submit soul for review</button></div></section></div><script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Human Verification Terminal</title>
+  <meta name="description" content="A short, reasonable verification procedure. It does not stay reasonable.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="authority">
+    <a class="authority-seal" href="../../index.html" aria-label="Leave the checkpoint">
+      <span aria-hidden="true">HV</span>86
+    </a>
+    <span class="authority-name">Human Verification Authority</span>
+    <span class="authority-state">Connection secure<sup>*</sup></span>
+  </header>
+
+  <main id="game-container">
+    <section class="terminal-copy">
+      <p class="eyebrow">Identity checkpoint</p>
+      <h1>Prove you&rsquo;re<br>probably human.</h1>
+      <p class="lede">Complete a short, reasonable verification procedure. The procedure may become less
+        reasonable without notice.</p>
+      <ol class="stages">
+        <li class="active">Presence</li>
+        <li>Perception</li>
+        <li>Listening</li>
+        <li>Emotion</li>
+      </ol>
+    </section>
+
+    <section class="terminal-shell">
+      <div class="terminal-top">
+        <span>Session 4F8&ndash;B</span>
+        <span id="loop-counter">Verification attempts: 0</span>
+      </div>
+
+      <div id="widget" class="captcha-box">
+        <div id="step-0" class="start-step">
+          <span class="step-label">Stage 01 &middot; Presence</span>
+          <h2>Confirm that you are not a robot.</h2>
+          <button onclick="startChallenge()" id="checkbox" type="button">
+            <span id="check-icon" class="opacity-0" aria-hidden="true"></span>Begin verification
+          </button>
+        </div>
+
+        <div id="step-grid" class="hidden">
+          <span class="step-label">Stage 02 &middot; Perception</span>
+          <h2>Select every square containing</h2>
+          <p id="grid-prompt">a sense of lingering regret</p>
+          <div id="captcha-grid"></div>
+          <button onclick="verifyGrid()" class="verify-button" type="button">Verify selection</button>
+        </div>
+
+        <div id="step-audio" class="hidden">
+          <span class="step-label">Stage 03 &middot; Listening</span>
+          <h2>Transcribe the distorted maritime recording.</h2>
+          <div class="audio-row">
+            <button onclick="playDistortedAudio()" class="play-button" type="button">Play</button>
+            <div id="audio-waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <input id="audio-input" placeholder="Enter what you think you heard" aria-label="What you heard">
+          <button onclick="verifyAudio()" class="verify-button" type="button">Process audio</button>
+        </div>
+      </div>
+
+      <!-- The machine-readable zone, as on any document that does not trust you. -->
+      <div class="mrz">
+        <span id="status-log">[WAITING FOR HUMAN INPUT...]</span>
+        <span class="mrz-line" aria-hidden="true">P&lt;HV86HUMAN&lt;&lt;UNVERIFIED&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>
+        <small>*Secure is a marketing term.</small>
+      </div>
+    </section>
+  </main>
+
+  <div id="essay-modal" class="essay-modal hidden">
+    <section>
+      <span class="step-label danger">Stage 04 &middot; Emotion</span>
+      <h2>Malicious activity detected.</h2>
+      <p>Define &ldquo;love&rdquo; in exactly 500 words without using the letter E.</p>
+      <textarea id="essay-input" placeholder="Begin typing your soul&rsquo;s confession..."
+        aria-label="Your definition of love"></textarea>
+      <div class="essay-foot">
+        <span id="word-count">Words: 0 / 500</span>
+        <button onclick="submitHumanityEssay()" type="button">Submit soul for review</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

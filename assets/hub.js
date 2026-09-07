@@ -1,7 +1,7 @@
 /* ============================================================
    Fun Stuffs — Shared hub helper
    Loaded by every project. Two jobs:
-     1. Inject a consistent floating "Back to Hub" pill.
+     1. Inject a consistent floating "Back" pill.
      2. Expose a tiny FX namespace (toast, copy, random helpers)
         so individual toys stop re-implementing the basics.
 
@@ -40,20 +40,10 @@
     var a = document.createElement('a');
     a.className = 'fx-back';
     a.href = hubHref;
-    a.setAttribute('aria-label', 'Back to the hub');
+    a.setAttribute('aria-label', 'Back to Fun Stuffs');
     a.innerHTML = '<span class="fx-back-arrow" aria-hidden="true">&larr;</span>' +
-                  '<span>Back to Hub</span>';
+                  '<span>Fun Stuffs</span>';
     if (luminanceIsDark()) a.setAttribute('data-fx-dark', '');
-    document.body.appendChild(a);
-  }
-
-  function injectProjectStamp() {
-    if (document.querySelector('.fx-project-stamp')) return;
-    var a = document.createElement('a');
-    a.className = 'fx-project-stamp';
-    a.href = hubHref;
-    a.setAttribute('aria-label', 'Return to the Fun Stuffs collection');
-    a.innerHTML = '<span>Fun Stuffs / Exhibit</span>';
     document.body.appendChild(a);
   }
 
@@ -118,12 +108,8 @@
 
   /* ---- boot ---------------------------------------------- */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      injectBackPill();
-      injectProjectStamp();
-    });
+    document.addEventListener('DOMContentLoaded', injectBackPill);
   } else {
     injectBackPill();
-    injectProjectStamp();
   }
 })();

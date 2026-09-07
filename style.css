@@ -1,22 +1,320 @@
-:root{--chamber:#1836c7;--chamber-deep:#10258f;--paper:#f7f3e8;--ink:#111a2d;--lime:#c9ff3d;--orange:#ff5c35;--line:rgba(247,243,232,.22);--mono:'Space Mono',monospace;--display:'Archivo Black',sans-serif;--body:'Manrope',sans-serif}
-*{box-sizing:border-box;margin:0;padding:0;user-select:none}
-html,body{width:100%;height:100%;overflow:hidden}
-body{background:var(--chamber);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;background:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,transparent 4rem,#000 12rem,#000 80%,transparent)}
-.lab-header{position:fixed;inset:0 0 auto;z-index:80;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,3vw,2.5rem);border-bottom:1px solid var(--paper);background:rgba(16,37,143,.86);backdrop-filter:blur(14px);pointer-events:none}
-.lab-brand{display:flex;align-items:center;gap:.75rem;color:var(--paper);font-weight:800;text-decoration:none;pointer-events:auto}.brand-mark{display:grid;place-items:center;width:36px;height:36px;background:var(--lime);border:1px solid var(--ink);color:var(--ink);font:700 12px/1 var(--mono);box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)}
-.experiment-id{display:flex;align-items:center;gap:.7rem;font:400 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}.experiment-id strong{padding:.45rem .6rem;border:1px solid var(--line);font-size:11px}
-#physics-container{position:relative;width:100%;height:100%;overflow:hidden;isolation:isolate}
-.chamber-copy{position:absolute;left:clamp(1rem,6vw,6rem);top:clamp(7rem,18vh,11rem);z-index:0;pointer-events:none}.chamber-copy span{display:block;margin-bottom:.6rem;color:var(--lime);font:700 11px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase}.chamber-copy strong{display:block;max-width:700px;font:400 clamp(3.8rem,9vw,8rem)/.86 var(--display);letter-spacing:-.055em;text-transform:uppercase;text-shadow:6px 6px 0 var(--chamber-deep);opacity:.2}
-.telemetry{position:absolute;z-index:60;top:92px;right:clamp(1rem,3vw,2.5rem);width:min(310px,calc(100vw - 2rem));padding:1rem;border:1px solid var(--paper);background:var(--ink);box-shadow:7px 7px 0 var(--lime);display:grid;grid-template-columns:auto 1fr;gap:.8rem;pointer-events:none}.status-light{width:12px;height:12px;margin-top:.2rem;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px rgba(201,255,61,.12),0 0 18px var(--lime)}.telemetry-label{display:block;margin-bottom:.3rem;color:#aab4d0;font:400 9px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase}.telemetry strong{font-size:.9rem}.telemetry dl{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);margin-top:.3rem;border-top:1px solid rgba(255,255,255,.15)}.telemetry dl div{padding-top:.8rem}.telemetry dt{color:#aab4d0;font:400 8px/1 var(--mono);text-transform:uppercase}.telemetry dd{margin-top:.35rem;font:700 11px/1 var(--mono)}
-.control-deck{position:absolute;z-index:70;left:50%;bottom:1.25rem;transform:translateX(-50%);width:min(740px,calc(100vw - 2rem));display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.75rem;background:var(--paper);border:1px solid var(--ink);color:var(--ink);box-shadow:8px 8px 0 var(--ink);pointer-events:auto}.control-deck p,.control-deck small{font:700 9px/1.2 var(--mono);text-transform:uppercase}.control-deck small{max-width:85px;color:#667085;font-weight:400}.control-dot{display:inline-block;width:7px;height:7px;margin-right:.4rem;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--ink)}.button-bank{display:flex;justify-content:center;gap:.45rem}.button-bank button{min-height:42px;padding:.65rem .9rem;border:1px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font:700 10px/1 var(--mono);text-transform:uppercase;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}.button-bank button:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--ink)}.button-bank button:active{transform:translate(2px,2px);box-shadow:none}.button-bank .primary-control{background:var(--lime)}
-.physics-item{position:absolute;z-index:10;cursor:grab;will-change:transform;touch-action:none;border:1px solid var(--ink);box-shadow:6px 6px 0 rgba(17,26,45,.78);transition:box-shadow .18s ease,filter .18s ease}.physics-item:active{cursor:grabbing;box-shadow:2px 2px 0 var(--ink);filter:brightness(1.04)}.specimen-label{display:block;margin-bottom:.75rem;font:700 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.6}
-.title-card{width:min(390px,82vw);padding:1.5rem;background:var(--paper);color:var(--ink)}.title-card h1{font:400 clamp(1.75rem,4vw,2.7rem)/.94 var(--display);letter-spacing:-.045em;text-transform:uppercase}.title-card p{margin-top:.8rem;color:#596277;font-size:.85rem}
-.pill{padding:.75rem 1.15rem;border-radius:999px;background:var(--lime);color:var(--ink);font:700 11px/1 var(--mono);white-space:nowrap}.accent-pill{background:var(--orange);color:#fff}
-.code-card{padding:1.1rem 1.25rem;background:var(--ink);color:#fff}.code-card code{font:400 12px/1.4 var(--mono)}.code-card code i{color:#9bb1ff;font-style:normal}.code-card code b{color:var(--lime)}
-.mass-card{display:grid;place-items:center;width:112px;height:112px;border-radius:50%;background:var(--paper);color:var(--ink)}.mass-card strong{font:400 3rem/1 var(--display)}.orbit{position:absolute;width:72px;height:36px;border:1px solid var(--orange);border-radius:50%;transform:rotate(-22deg)}
-.note-card{width:min(310px,78vw);padding:1.25rem;background:var(--paper);color:var(--ink)}.note-card p{font-size:.88rem;line-height:1.55}
-.credit-card{display:flex;flex-direction:column;gap:.3rem;padding:1rem 1.2rem;background:var(--lime);color:var(--ink)}.credit-card span{font:400 8px/1 var(--mono);text-transform:uppercase}.credit-card strong{font-size:.8rem}.orange-card{background:var(--orange);color:#fff}
-noscript{position:fixed;inset:auto 1rem 1rem;z-index:100;padding:1rem;background:var(--orange);color:#fff;text-align:center}
-@media(max-width:700px){.lab-header{height:60px}.experiment-id span{display:none}.telemetry{top:72px;width:220px;padding:.75rem}.telemetry dl{display:none}.chamber-copy{top:8rem}.chamber-copy strong{font-size:3.5rem}.control-deck{bottom:.65rem;display:block;padding:.55rem}.control-deck>p,.control-deck>small{display:none}.button-bank{width:100%}.button-bank button{flex:1;padding:.6rem .35rem;font-size:8px}.button-bank button span{display:none}.title-card{padding:1.1rem}.physics-item{box-shadow:4px 4px 0 rgba(17,26,45,.78)}}
-@media(prefers-reduced-motion:reduce){.physics-item,.button-bank button{transition:none}}
+/* ============================================================
+   Gravity room — the one page where the site falls over.
+   Same monochrome system as the hub; no colour anywhere, so the
+   only thing to look at is the physics.
+   ============================================================ */
+
+:root {
+  --paper: #f5f5f6;
+  --raised: #ffffff;
+  --sunken: #ececed;
+  --ink: #131316;
+  --ink-2: #5f5f68;
+  --ink-3: #8d8d96;
+  --line: #e6e6e9;
+  --line-2: #d3d3d9;
+  --slab-bg: #131316;
+  --slab-fg: #ffffff;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --shadow: 0 1px 2px rgba(19, 19, 22, .05), 0 14px 34px -18px rgba(19, 19, 22, .5);
+  --shadow-lift: 0 2px 6px rgba(19, 19, 22, .06), 0 24px 48px -20px rgba(19, 19, 22, .6);
+  --mono: 'DM Mono', ui-monospace, monospace;
+}
+
+/* Follows whatever theme was chosen on the hub. */
+html.dark {
+  --paper: #0b0b0d;
+  --raised: #161619;
+  --sunken: #202024;
+  --ink: #f2f2f3;
+  --ink-2: #a2a2ab;
+  --ink-3: #76767e;
+  --line: #242427;
+  --line-2: #34343b;
+  --slab-bg: #000000;
+  --slab-fg: #f2f2f3;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 16px 36px -18px #000;
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, .6), 0 26px 52px -20px #000;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { width: 100%; height: 100%; overflow: hidden; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ---- Header ------------------------------------------------ */
+
+.lab-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  pointer-events: none;
+}
+
+.lab-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--ink);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 10px/1 var(--mono);
+}
+
+.room-label {
+  color: var(--ink-3);
+  font: 400 .7rem/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ---- The room ---------------------------------------------- */
+
+#physics-container { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; }
+
+.chamber-copy {
+  position: absolute;
+  left: clamp(1rem, 5vw, 4.5rem);
+  top: clamp(6.5rem, 17vh, 10rem);
+  z-index: 0;
+  pointer-events: none;
+}
+.chamber-copy span {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--ink-3);
+  font: 400 .7rem/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.chamber-copy strong {
+  display: block;
+  max-width: 12ch;
+  color: var(--ink);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 600;
+  line-height: .95;
+  letter-spacing: -.045em;
+  opacity: .07;
+}
+
+/* ---- Telemetry --------------------------------------------- */
+
+.telemetry {
+  position: absolute;
+  z-index: 60;
+  top: 76px;
+  right: clamp(1rem, 4vw, 2.5rem);
+  width: min(280px, calc(100vw - 2rem));
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .75rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--raised);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+
+.status-light {
+  width: 7px;
+  height: 7px;
+  margin-top: .45rem;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.telemetry-label {
+  display: block;
+  margin-bottom: .25rem;
+  color: var(--ink-3);
+  font: 400 .65rem/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.telemetry strong { font-size: .9375rem; font-weight: 600; letter-spacing: -.01em; }
+
+.telemetry dl {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: .4rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--line);
+}
+.telemetry dt { color: var(--ink-3); font: 400 .6rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.telemetry dd { margin-top: .4rem; font: 500 .75rem/1 var(--mono); }
+
+/* ---- Controls ---------------------------------------------- */
+
+.control-deck {
+  position: absolute;
+  z-index: 70;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem .5rem .5rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--raised) 88%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: var(--shadow);
+  pointer-events: auto;
+}
+
+.deck-tip { color: var(--ink-3); font-size: .8125rem; white-space: nowrap; }
+
+.button-bank { display: flex; gap: .35rem; }
+
+.button-bank button {
+  padding: .55rem .95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--raised);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  transition: background-color .2s var(--ease), border-color .2s var(--ease), transform .15s var(--ease);
+}
+.button-bank button:hover { border-color: var(--line-2); background: var(--paper); }
+.button-bank button:active { transform: scale(.97); }
+.button-bank .primary-control { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.button-bank .primary-control:hover {
+  background: color-mix(in srgb, var(--ink) 84%, var(--paper));
+  border-color: color-mix(in srgb, var(--ink) 84%, var(--paper));
+}
+
+/* ---- Specimens --------------------------------------------- */
+
+.physics-item {
+  position: absolute;
+  z-index: 10;
+  cursor: grab;
+  will-change: transform;
+  touch-action: none;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--raised);
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s var(--ease);
+}
+.physics-item:active { cursor: grabbing; box-shadow: var(--shadow-lift); }
+
+.specimen-label {
+  display: block;
+  margin-bottom: .7rem;
+  color: var(--ink-3);
+  font: 400 .65rem/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.title-card { width: min(360px, 82vw); padding: 1.4rem 1.5rem; }
+.title-card h1 { font-size: clamp(1.4rem, 3.4vw, 1.9rem); font-weight: 600; line-height: 1.15; letter-spacing: -.03em; }
+.title-card p { margin-top: .6rem; color: var(--ink-2); font-size: .875rem; line-height: 1.5; }
+
+.pill {
+  padding: .7rem 1.1rem;
+  border-radius: 999px;
+  font-size: .8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.accent-pill { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+.code-card { padding: 1rem 1.15rem; border-color: var(--slab-bg); background: var(--slab-bg); }
+.code-card .specimen-label { color: color-mix(in srgb, var(--slab-fg) 45%, transparent); }
+.code-card code { color: var(--slab-fg); font: 400 .8125rem/1.4 var(--mono); }
+.code-card code i { color: #9aa0ac; font-style: normal; }
+.code-card code b { color: var(--slab-fg); font-weight: 500; }
+
+.mass-card {
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+}
+.mass-card strong { font-size: 2.4rem; font-weight: 600; letter-spacing: -.04em; }
+.orbit {
+  position: absolute;
+  width: 66px;
+  height: 32px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  transform: rotate(-22deg);
+}
+
+.note-card { width: min(300px, 78vw); padding: 1.25rem; }
+.note-card p { color: var(--ink-2); font-size: .875rem; line-height: 1.55; }
+
+.credit-card { display: flex; flex-direction: column; gap: .3rem; padding: .95rem 1.15rem; background: var(--sunken); }
+.credit-card span { color: var(--ink-3); font: 400 .6rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.credit-card strong { font-size: .8125rem; font-weight: 600; }
+
+noscript {
+  position: fixed;
+  inset: auto 1rem 1rem;
+  z-index: 100;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: .875rem;
+  text-align: center;
+}
+
+/* ---- Small screens ----------------------------------------- */
+
+@media (max-width: 700px) {
+  .room-label { display: none; }
+  .telemetry { top: 68px; width: 200px; padding: .8rem .9rem; }
+  .telemetry dl { display: none; }
+  .chamber-copy { top: 7rem; }
+  .control-deck { bottom: .75rem; width: calc(100vw - 1.5rem); padding: .45rem; }
+  .deck-tip { display: none; }
+  .button-bank { width: 100%; }
+  .button-bank button { flex: 1; padding: .6rem .4rem; font-size: .75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .physics-item, .button-bank button { transition: none; }
+}

@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'glossy-button';
-            btn.innerHTML = 'DO NOT<br>PRESS';
+            btn.innerHTML = '<span>Do not</span><strong>Press</strong>';
             
             // Random jitter as count increases
             if (buttonCount > 20) btn.classList.add('jitter');

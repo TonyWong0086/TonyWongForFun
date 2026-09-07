@@ -1,1 +1,86 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cancellation Studio — Flaky Friend</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="style.css"></head><body><header><a href="../../index.html" class="mark">FF</a><div><span>Social avoidance tools</span><strong>Cancellation Studio</strong></div><a href="../../index.html" class="exit">Close studio ↗</a></header><main><section class="brief"><span class="eyebrow">Tonight / 7:00 PM</span><h1>Cancel plans.<br><em>Preserve friendship.</em></h1><p>Generate a last-minute excuse with exactly enough detail to sound emotionally expensive.</p><div id="believability" class="hidden score"><div><span>Believability model</span><strong id="believe-pct">—</strong></div><div class="score-track"><i id="believe-bar"></i></div></div><button onclick="generateExcuse()" class="generate">Draft an excuse <span>→</span></button><button onclick="copyToClipboard()" id="copy-btn" class="copy hidden">Copy latest excuse</button></section><section class="phone"><div class="phone-head"><a href="../../index.html">‹</a><div class="avatar">?</div><strong>Person you’re disappointing</strong><span>online</span></div><div class="imessage-container" id="thread"><div class="timestamp">Today 5:42 PM</div><div class="bubble received">Hey! Still coming through tonight? Everyone’s asking.</div><div id="dynamic-messages"></div><div id="typing-indicator" class="hidden"><div class="typing"><i></i><i></i><i></i></div></div></div><div class="compose"><span>Message</span><button>↑</button></div></section></main><script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cancellation Studio</title>
+  <meta name="description" content="Draft a last-minute excuse with exactly enough detail to sound emotionally expensive.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap">
+  <link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <a href="../../index.html" class="mark" aria-label="Close the studio">FF</a>
+    <div class="studio-name">
+      <span>Social avoidance tools</span>
+      <strong>Cancellation Studio</strong>
+    </div>
+    <a href="../../index.html" class="exit">Close studio</a>
+  </header>
+
+  <main>
+    <section class="brief">
+      <span class="eyebrow">Tonight &middot; 7:00 PM</span>
+      <h1>Cancel plans.<br><em>Keep the friend.</em></h1>
+      <p class="lede">Draft a last-minute excuse with exactly enough detail to sound emotionally expensive.</p>
+
+      <div id="believability" class="hidden score">
+        <div class="score-head">
+          <span>Believability</span>
+          <strong id="believe-pct">&mdash;</strong>
+        </div>
+        <div class="score-track"><i id="believe-bar"></i></div>
+        <p class="score-note">Scored the moment it sends. No revisions.</p>
+      </div>
+
+      <div class="brief-actions">
+        <button onclick="generateExcuse()" class="generate" type="button">Draft an excuse</button>
+        <button onclick="copyToClipboard()" id="copy-btn" class="copy hidden" type="button">Copy it</button>
+      </div>
+    </section>
+
+    <section class="phone" aria-label="Message thread">
+      <div class="phone-body">
+        <div class="island" aria-hidden="true"></div>
+        <div class="status-bar" aria-hidden="true">
+          <span>6:58</span>
+          <span class="status-icons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span>
+        </div>
+
+        <div class="phone-head">
+          <a href="../../index.html" aria-label="Back">&lsaquo;</a>
+          <span class="avatar" aria-hidden="true">?</span>
+          <span class="contact">
+            <strong>Person you&rsquo;re disappointing</strong>
+            <small>online</small>
+          </span>
+        </div>
+
+        <div class="imessage-container" id="thread">
+          <div class="timestamp">Today 5:42 PM</div>
+          <div class="bubble received">Hey! Still coming through tonight? Everyone&rsquo;s asking.</div>
+          <div id="dynamic-messages"></div>
+          <div id="typing-indicator" class="hidden">
+            <div class="typing"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <div class="compose">
+          <span>Message</span>
+          <button type="button" aria-label="Send" disabled>&uarr;</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back data-dark></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

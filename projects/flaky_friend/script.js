@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addReceived(text) {
         const b = document.createElement('div');
-        b.className = "bubble bg-ios-gray self-start rounded-bl-none text-black mt-2";
+        b.className = 'bubble received';
         b.textContent = text;
         thread.appendChild(b);
         scrollDown();

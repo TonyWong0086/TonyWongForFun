@@ -15,11 +15,11 @@
   --fx-signal: #ffd84d;
 
   /* Neutral ink + surfaces (light context) */
-  --fx-ink: #0f172a;
-  --fx-ink-soft: #475569;
-  --fx-ink-faint: #94a3b8;
+  --fx-ink: #131316;
+  --fx-ink-soft: #5f5f68;
+  --fx-ink-faint: #8d8d96;
   --fx-surface: #ffffff;
-  --fx-line: #e2e8f0;
+  --fx-line: #e6e6e9;
 
   /* Motion */
   --fx-ease: cubic-bezier(.22, 1, .36, 1);
@@ -78,23 +78,22 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 
 .fx-back {
   position: fixed;
-  top: 1.25rem;
-  left: 1.25rem;
+  top: 1rem;
+  left: 1rem;
   z-index: 2147483000;
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
-  padding: .5rem .9rem .5rem .75rem;
-  font: 600 12px/1 'Inter', system-ui, sans-serif;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  gap: .45rem;
+  padding: .45rem .85rem .45rem .7rem;
+  font: 500 13px/1 'Instrument Sans', system-ui, sans-serif;
+  letter-spacing: -.005em;
   text-decoration: none;
   color: var(--fx-ink-soft);
-  background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(148, 163, 184, .35);
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid rgba(19, 19, 22, .1);
   border-radius: 999px;
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
   box-shadow: var(--fx-shadow-sm);
   cursor: pointer;
   transition: transform .2s var(--fx-spring), color .2s var(--fx-ease),
@@ -103,9 +102,9 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 }
 
 .fx-back:hover {
-  color: var(--fx-brand);
+  color: var(--fx-ink);
+  background: rgba(255, 255, 255, .95);
   box-shadow: var(--fx-shadow-md);
-  transform: translateX(-2px);
 }
 
 .fx-back:hover .fx-back-arrow { transform: translateX(-3px); }
@@ -119,11 +118,11 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 /* Dark-background variant — hub.js sets data-fx-dark on the pill
    when it detects a dark page. */
 .fx-back[data-fx-dark] {
-  color: rgba(255, 255, 255, .75);
-  background: rgba(15, 23, 42, .55);
-  border-color: rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .72);
+  background: rgba(12, 12, 14, .6);
+  border-color: rgba(255, 255, 255, .16);
 }
-.fx-back[data-fx-dark]:hover { color: #fff; }
+.fx-back[data-fx-dark]:hover { color: #fff; background: rgba(12, 12, 14, .82); }
 
 @keyframes fx-back-in {
   from { opacity: 0; transform: translateY(-8px); }
@@ -146,41 +145,15 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 }
 
 .fx-toast {
-  padding: .65rem 1.1rem;
-  font: 600 13px/1.3 'Inter', system-ui, sans-serif;
+  padding: .6rem 1rem;
+  font: 500 13px/1.3 'Instrument Sans', system-ui, sans-serif;
   color: #fff;
-  background: rgba(15, 23, 42, .92);
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 8px;
+  background: rgba(19, 19, 22, .94);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
   box-shadow: var(--fx-shadow-lg);
   animation: fx-toast-in .35s var(--fx-spring) both;
 }
-
-/* A quiet collection mark shared by every standalone experiment. */
-.fx-project-stamp {
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  z-index: 2147482999;
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  padding: .5rem .65rem;
-  color: #172033;
-  background: #ffd84d;
-  border: 1px solid #172033;
-  border-radius: 6px;
-  box-shadow: 3px 3px 0 #172033;
-  font: 500 10px/1 'DM Mono', 'Fira Code', monospace;
-  letter-spacing: .08em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transform: rotate(-1deg);
-  transition: transform .2s var(--fx-spring), box-shadow .2s var(--fx-ease);
-}
-.fx-project-stamp::before { content: '↙'; font-size: 13px; }
-.fx-project-stamp:hover { transform: translate(-2px,-2px) rotate(-1deg); box-shadow: 5px 5px 0 #172033; }
-@media (max-width: 640px) { .fx-project-stamp { left: .65rem; bottom: .65rem; padding: .45rem; } .fx-project-stamp span { display: none; } }
 
 .fx-toast.fx-leaving { animation: fx-toast-out .3s var(--fx-ease) both; }
 

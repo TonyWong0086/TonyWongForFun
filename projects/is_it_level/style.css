@@ -1,0 +1,243 @@
+/* ============================================================
+   Is It Level? — a quiet contemporary gallery.
+   The painting is a horizon, and the wall carries a datum line
+   that is genuinely level, so the eye can see the failure.
+   ============================================================ */
+
+:root {
+  --wall: #e7e2d8;
+  --wall-lit: #f5f1e8;
+  --label: #3b3730;
+  --label-2: #8a847a;
+  --frame: #24211c;
+  --mat: #fbfaf6;
+  --reject: #a8443a;
+  --sans: 'Jost', system-ui, sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--sans);
+  color: var(--label);
+}
+
+:focus-visible { outline: 2px solid var(--label); outline-offset: 4px; }
+
+.gallery-wall {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  /* One spotlight, angled from above, the way a work is actually lit. */
+  background: radial-gradient(80% 60% at 50% 22%, var(--wall-lit) 0%, var(--wall) 62%, #ddd7cb 100%);
+  box-shadow: inset 0 0 140px rgba(60, 52, 38, .09);
+}
+
+.exit-link {
+  position: fixed;
+  top: clamp(1.25rem, 4vw, 2.5rem);
+  left: clamp(1.25rem, 4vw, 2.5rem);
+  color: var(--label-2);
+  font-size: .6875rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.exit-link::before { content: '\2190 '; }
+.exit-link:hover { color: var(--label); }
+
+/* ---- The work ---------------------------------------------- */
+
+.frame-container {
+  --frame-w: clamp(230px, 30vw, 340px);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: 3rem 0;
+  perspective: 1000px;
+}
+
+/* The reference the painting will never match. Sits at exactly the
+   height the painted horizon would be if the frame were level:
+   container padding + frame border and mat + 58% of the canvas. */
+.datum {
+  position: absolute;
+  left: -100vw;
+  right: -100vw;
+  top: calc(3rem + 33px + .58 * (var(--frame-w) * 1.25 - 66px));
+  height: 1px;
+  background: rgba(59, 55, 48, .22);
+}
+
+#art-frame {
+  position: relative;
+  width: var(--frame-w);
+  aspect-ratio: 4 / 5;
+  padding: 22px;
+  border: 11px solid var(--frame);
+  background: var(--mat);
+  box-shadow:
+    0 30px 60px -18px rgba(50, 44, 32, .35),
+    0 10px 22px -12px rgba(0, 0, 0, .25);
+  transform-origin: center center;
+  transition: transform .1s cubic-bezier(.2, 0, .2, 1);
+}
+
+/* The hanging wire. */
+#art-frame::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -42px;
+  width: 1px;
+  height: 42px;
+  background: rgba(59, 55, 48, .3);
+  transform: translateX(-50%);
+}
+
+.art-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Sky above, ground below, in oil. */
+  background: linear-gradient(180deg, #35566a 0%, #23414f 58%, #1b2b2c 58.2%, #262019 100%);
+}
+
+/* The horizon itself — the thing you are trying to level. */
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  height: 1px;
+  background: rgba(240, 233, 216, .75);
+}
+
+.art-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(255, 255, 255, .16), transparent 42%);
+  pointer-events: none;
+}
+
+/* ---- Wall label -------------------------------------------- */
+
+.wall-label {
+  max-width: 190px;
+  padding-bottom: .25rem;
+  border-top: 1px solid rgba(59, 55, 48, .25);
+  padding-top: .7rem;
+}
+.wall-label span {
+  display: block;
+  color: var(--label-2);
+  font-size: .625rem;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.wall-label h1 {
+  margin: .5rem 0;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: .01em;
+  color: var(--label);
+}
+.wall-label .acquisition { margin-top: .5rem; opacity: .6; }
+
+/* ---- Controls ---------------------------------------------- */
+
+.controls {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(1.75rem, 6vh, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(380px, 84vw);
+  transform: translateX(-50%);
+}
+
+.status-badge {
+  padding: .35rem .85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .55);
+  color: var(--label-2);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: color .3s ease, background-color .3s ease;
+}
+.status-badge.is-rejected { background: rgba(168, 68, 58, .12); color: var(--reject); }
+
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+input[type=range]::-webkit-slider-runnable-track { height: 1px; background: rgba(59, 55, 48, .3); }
+input[type=range]::-moz-range-track { height: 1px; background: rgba(59, 55, 48, .3); }
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8.5px;
+  border: 1px solid rgba(59, 55, 48, .35);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 8px -2px rgba(0, 0, 0, .25);
+  cursor: grab;
+  transition: transform .1s ease, background-color .1s ease;
+}
+input[type=range]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(59, 55, 48, .35);
+  border-radius: 50%;
+  background: #fff;
+  cursor: grab;
+}
+input[type=range]:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+  background: var(--frame);
+  border-color: var(--frame);
+  cursor: grabbing;
+}
+
+.control-note {
+  margin: 0;
+  color: var(--label-2);
+  font-size: .625rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ---- Small screens ----------------------------------------- */
+
+@media (max-width: 720px) {
+  .frame-container { flex-direction: column; align-items: center; gap: 1.25rem; padding-top: 2rem; }
+  .wall-label { max-width: 260px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #art-frame { transition: none; }
+}

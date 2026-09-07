@@ -42,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioInput = document.getElementById('audio-input');
     const loopCounter = document.getElementById('loop-counter');
 
+    // Keep the stage list on the left honest about where you are.
+    const stageItems = document.querySelectorAll('.stages li');
+    const setStage = (n) => {
+        stageItems.forEach((li, i) => li.classList.toggle('active', i === n - 1));
+    };
+
     let attempts = 0;
     const bumpAttempts = () => {
         attempts++;
@@ -82,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             step0.classList.add('hidden');
             stepGrid.classList.remove('hidden');
+            setStage(2);
             renderGrid();
         }, 800);
     };
@@ -93,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement('div');
-            cell.className = "aspect-square bg-slate-100 border border-slate-200 grid-cell cursor-pointer flex items-center justify-center overflow-hidden h-24";
+            cell.className = 'grid-cell';
             
             // Random abstract SVG shapes
             const hue = Math.floor(Math.random() * 360);
@@ -142,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             widget.classList.remove('glitch-text');
             stepGrid.classList.add('hidden');
             stepAudio.classList.remove('hidden');
+            setStage(3);
         }, 1500);
     };
 
@@ -149,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.playDistortedAudio = () => {
         log("TRANSMITTING SHANTY...");
         playNoise(); // genuine (useless) distorted audio
-        const bars = document.querySelectorAll('#audio-waveform div');
+        const bars = document.querySelectorAll('#audio-waveform span');
         bars.forEach(bar => {
             bar.style.height = `${Math.random()*100}%`;
             bar.classList.add('duration-75');
@@ -176,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. The Ultimate Trap: Essay
     function triggerEssayTrap() {
         log("MALICIOUS ENTITY DETECTED. LOCKDOWN ACTIVE.");
+        setStage(4);
         essayModal.classList.remove('hidden');
         essayModal.classList.add('flex');
     }
@@ -186,9 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Glitch the UI if they type 'E'
         if (essayInput.value.toLowerCase().includes('e')) {
-            document.body.style.backgroundColor = '#fee2e2';
+            document.body.classList.add('forbidden-flash');
             log("FORBIDDEN CHARACTER 'E' DETECTED.");
-            setTimeout(() => document.body.style.backgroundColor = '#f5f5f5', 500);
+            setTimeout(() => document.body.classList.remove('forbidden-flash'), 500);
         }
     });
 

@@ -1,7 +1,81 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Officially sanctioned, deeply minor curses."><title>Department of Minor Misfortune</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="style.css"></head><body>
-<header class="dept-header"><a href="../../index.html" class="dept-seal">DM</a><div><span>Municipal services / Petty grievances</span><strong>Department of Minor Misfortune</strong></div><a href="../../index.html" class="exit-link">Exit department ↗</a></header>
-<main><section class="intro"><p class="kicker">Form HX–14B</p><h1>Request a<br><em>minor curse.</em></h1><p>Submit one irritating party for a precise, non-lethal inconvenience. Most requests are processed instantly and without oversight.</p></section>
-<section class="form-panel"><div class="form-heading"><span>01</span><div><p>Target classification</p><small>Select the party deserving mild cosmic intervention.</small></div></div><div class="categories"><button class="cat-btn active" data-category="general">General annoyance</button><button class="cat-btn" data-category="drivers">Bad drivers</button><button class="cat-btn" data-category="exes">Exes</button><button class="cat-btn" data-category="coworkers">Coworkers</button><button class="cat-btn" data-category="roommates">Roommates</button><button class="cat-btn" data-category="tech">Tech / online</button></div><div class="cast-row"><button id="hex-btn" class="cast-button">Authorize misfortune <span>→</span></button><button id="surprise-btn" class="random-button">Choose target for me</button></div><p id="hex-count">No hexes filed yet.</p></section>
-<section id="curse-display" class="curse-box"><div class="notice-head"><span>Official notice of inconvenience</span><strong>HX</strong></div><p class="greeting ecard-only hidden">To whom it may concern,</p><blockquote id="curse-text">Authorize a request to receive your official curse.</blockquote><p class="signoff ecard-only hidden">Warmly,<br>The Universe</p><div class="notice-foot"><span>Valid until morale improves</span><span>Seal: ✦</span></div></section>
-<section class="actions"><button id="copy-btn">Copy notice</button><button id="ecard-toggle">Switch to greeting-card mode</button><p>Space or Enter authorizes another request.</p></section></main>
-<script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Officially sanctioned, deeply minor curses. Filed on your behalf.">
+  <title>Department of Minor Misfortune</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Zilla+Slab:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="dept-header">
+    <a href="../../index.html" class="dept-seal" aria-label="Leave the department">DM</a>
+    <div class="dept-name">
+      <span>Municipal services &middot; Petty grievances</span>
+      <strong>Department of Minor Misfortune</strong>
+    </div>
+    <a href="../../index.html" class="exit-link">Exit department</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="kicker">Form HX&ndash;14B</p>
+      <h1>Request a minor curse.</h1>
+      <p class="lede">Submit one irritating party for a precise, non-lethal inconvenience. Most requests are
+        processed instantly and without oversight.</p>
+    </section>
+
+    <section class="form-panel">
+      <div class="field">
+        <p class="field-label">Target classification</p>
+        <p class="field-help">Select the party deserving mild cosmic intervention.</p>
+        <div class="categories">
+          <button class="cat-btn active" data-category="general" type="button">General annoyance</button>
+          <button class="cat-btn" data-category="drivers" type="button">Bad drivers</button>
+          <button class="cat-btn" data-category="exes" type="button">Exes</button>
+          <button class="cat-btn" data-category="coworkers" type="button">Coworkers</button>
+          <button class="cat-btn" data-category="roommates" type="button">Roommates</button>
+          <button class="cat-btn" data-category="tech" type="button">Tech / online</button>
+        </div>
+      </div>
+
+      <div class="cast-row">
+        <button id="hex-btn" class="cast-button" type="button">Authorize misfortune</button>
+        <button id="surprise-btn" class="random-button" type="button">Choose target for me</button>
+      </div>
+      <p id="hex-count">No hexes filed yet.</p>
+    </section>
+
+    <section id="curse-display" class="curse-box">
+      <div class="notice-head">
+        <span>Official notice of inconvenience</span>
+        <span class="notice-ref">HX&ndash;14B</span>
+      </div>
+      <p class="greeting ecard-only">To whom it may concern,</p>
+      <blockquote id="curse-text" data-pristine="true">Authorize a request to receive your official curse.</blockquote>
+      <p class="signoff ecard-only">Warmly,<br>The Universe</p>
+      <div class="notice-foot">
+        <span>Valid until morale improves</span>
+        <span>No right of appeal</span>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="copy-btn" type="button">Copy notice</button>
+      <button id="ecard-toggle" type="button">Send it as a greeting card</button>
+      <p class="hint">Press space to file another request.</p>
+    </section>
+  </main>
+
+  <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

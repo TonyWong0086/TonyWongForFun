@@ -1,1 +1,58 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Containment Button — Do Not Press</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="style.css"></head><body><div class="room-grid"></div><header><a href="../../index.html">← Disconnect</a><span>Containment sector 08–B</span><strong>System armed</strong></header><main><div class="warning-copy"><span>Do not interact</span><h1>This button is<br>not for you.</h1><p>The button has no useful purpose. Pressing it will produce more buttons and measurable administrative disappointment.</p></div><section class="console"><div class="console-label"><span>Unauthorized input</span><strong>PRESSING PROHIBITED</strong></div><div id="button-container"><button id="main-button" class="glossy-button" type="button"><span>Do not</span><strong>Press</strong></button></div><div class="console-foot"><span>Safety cover removed</span><i></i><span>Warranty void</span></div></section></main><aside id="hud"><span>Containment breaches</span><strong id="hud-count">0</strong><p id="hud-msg">Awaiting poor judgment.</p></aside><div class="warning-text">Authorized personnel only · Seriously · Stop hovering</div><script src="../../assets/hub.js" data-hub="../../index.html" data-no-back data-dark></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Containment Button — Do not press</title>
+  <meta name="description" content="An equipment safety notice for a button that has no useful purpose.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="placard-head">
+    <span class="head-tag">Notice</span>
+    <span class="head-id">Containment sector 08&#8209;B</span>
+    <a class="head-exit" href="../../index.html">Disconnect</a>
+  </header>
+
+  <main class="notice">
+    <div class="notice-copy">
+      <p class="kicker">Equipment safety instruction</p>
+      <h1>This button<br>is not for you.</h1>
+      <p class="lede">It has no useful purpose. Pressing it produces more buttons and measurable
+        administrative disappointment.</p>
+      <ol class="procedure">
+        <li>Do not press the button.</li>
+        <li>If the button has been pressed, do not press it again.</li>
+        <li>There is no third instruction.</li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <span class="panel-cap">Unauthorized input</span>
+      <div id="button-container">
+        <button id="main-button" class="glossy-button" type="button">
+          <span>Do not</span><strong>Press</strong>
+        </button>
+      </div>
+      <span class="panel-cap panel-cap-end">Safety cover removed &middot; Warranty void</span>
+    </div>
+  </main>
+
+  <aside id="hud" class="status" aria-live="polite">
+    <span class="status-label">Buttons at large</span>
+    <strong id="hud-count">0</strong>
+    <p id="hud-msg">Awaiting poor judgment.</p>
+  </aside>
+
+  <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

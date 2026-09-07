@@ -132,9 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
         castCount++;
 
         curseText.style.opacity = '0';
+        curseBox.classList.remove('is-served'); // restart the stamp
+        void curseBox.offsetWidth;
         setTimeout(() => {
             curseText.textContent = next;
+            curseText.removeAttribute('data-pristine');
             curseText.style.opacity = '1';
+            curseBox.classList.add('is-served');
         }, 150);
 
         hexCount.textContent = `${castCount} hex${castCount === 1 ? '' : 'es'} cast · target: ${labels[currentCategory]}`;
@@ -152,8 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Copy current curse
     copyBtn.addEventListener('click', () => {
         const text = curseText.textContent.trim();
-        if (!text || /^Click the button/.test(text)) {
-            if (window.FX) FX.toast('Cast a hex first 🪄');
+        if (!text || curseText.dataset.pristine) {
+            if (window.FX) FX.toast('File a request first.');
             return;
         }
         if (window.FX) FX.copy(text);
@@ -173,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isEcardMode = !isEcardMode;
         curseBox.classList.toggle('ecard-mode', isEcardMode);
         ecardToggle.textContent = isEcardMode
-            ? '← Return to Minimalist Mode'
-            : '— Transform to E-Card Mode —';
+            ? 'Back to the official notice'
+            : 'Send it as a greeting card';
     });
 });

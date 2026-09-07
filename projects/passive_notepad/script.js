@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         corrections++;
         correctionsDisplay.textContent =
             `${corrections} HELPFUL CORRECTION${corrections === 1 ? '' : 'S'}`;
+        correctionsDisplay.classList.add('just-helped');
+        setTimeout(() => correctionsDisplay.classList.remove('just-helped'), 120);
     };
 
     // Configuration

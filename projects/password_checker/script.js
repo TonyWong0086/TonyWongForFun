@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             judgmentPanel.classList.add('hidden');
             strengthBar.style.width = '0';
             strengthLabel.textContent = 'Waiting...';
-            strengthLabel.className = 'text-xs font-bold uppercase tracking-wider text-slate-300';
+            strengthLabel.className = 'strength-label is-idle';
             return;
         }
 
@@ -176,15 +176,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (score < 30) {
             strengthBar.style.backgroundColor = '#ef4444';
             strengthLabel.textContent = 'Tragic';
-            strengthLabel.className = 'text-xs font-bold uppercase tracking-wider text-red-500';
+            strengthLabel.className = 'strength-label is-tragic';
         } else if (score < 70) {
             strengthBar.style.backgroundColor = '#f59e0b';
             strengthLabel.textContent = 'Mediocre';
-            strengthLabel.className = 'text-xs font-bold uppercase tracking-wider text-amber-500';
+            strengthLabel.className = 'strength-label is-mediocre';
         } else {
             strengthBar.style.backgroundColor = '#22c55e';
             strengthLabel.textContent = 'Try-Hard';
-            strengthLabel.className = 'text-xs font-bold uppercase tracking-wider text-emerald-500';
+            strengthLabel.className = 'strength-label is-tryhard';
         }
 
         judgmentText.textContent = feedback;

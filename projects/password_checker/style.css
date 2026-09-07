@@ -1,20 +1,280 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+/* ============================================================
+   Credential Judgment Unit — rack-mounted hardware, not a form.
+   Brushed chassis, a recessed phosphor screen, LED strength
+   segments, and readouts that do not flatter you.
+   ============================================================ */
 
-:root { --case:#c8d0bc; --dark:#243526; --screen:#c7f59a; --warn:#ff5d3d; }
-body.dot-grid { background:#798578; background-image:radial-gradient(#617061 1px,transparent 1px); background-size:12px 12px; font-family:'IBM Plex Mono',monospace!important; color:var(--dark); }
-body > header { background:var(--dark)!important; border:0!important; color:#eef4df; }
-body > header nav { height:58px!important; }
-body > header a { color:#eef4df!important; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; }
-main { max-width:860px!important; background:var(--case); margin:60px auto!important; padding:38px!important; border:4px solid var(--dark); border-radius:24px 24px 38px 38px; box-shadow:inset 0 0 0 5px #e3e9d8, 18px 22px 0 rgba(24,35,25,.45); position:relative; }
-main::before { content:'FS INDUSTRIAL SYSTEMS · MODEL CJ-86 · DO NOT OPEN'; display:block; border-bottom:2px solid var(--dark); padding-bottom:14px; margin-bottom:24px; font:600 11px 'IBM Plex Mono',monospace; letter-spacing:.12em; }
-main > header { text-align:left!important; margin-bottom:28px!important; }
-main > header > div { display:none!important; }
-main h1 { font:400 clamp(2.8rem,7vw,5rem)/.9 'Black Ops One',sans-serif!important; letter-spacing:-.03em!important; text-transform:uppercase; }
-main > header p { color:var(--dark)!important; font:600 13px 'IBM Plex Mono',monospace!important; text-transform:uppercase; }
-main > section, main > div:not(.fx-project-stamp) { border:3px solid var(--dark)!important; border-radius:8px!important; box-shadow:inset 0 0 0 4px rgba(36,53,38,.12)!important; background:#e6eadc!important; }
-#password-input { border:3px solid var(--dark)!important; border-radius:3px!important; background:var(--screen)!important; color:#152211!important; font:600 21px 'IBM Plex Mono',monospace!important; box-shadow:inset 0 4px 10px rgba(27,50,22,.22); }
-button { border-radius:3px!important; font-family:'IBM Plex Mono',monospace!important; text-transform:uppercase; }
-#strength-bar { border-radius:0!important; }
-#strength-label { font-family:'IBM Plex Mono',monospace!important; }
-@media(max-width:700px){main{margin:24px 12px!important;padding:25px 18px!important;border-radius:18px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:root {
+  --room: #0d0f10;
+  --chassis: #1c2022;
+  --chassis-2: #23282a;
+  --edge: #33393c;
+  --screen: #06100c;
+  --phosphor: #46e39a;
+  --phosphor-dim: rgba(70, 227, 154, .45);
+  --label: #8b9499;
+  --label-dim: #5d666a;
+  --alarm: #ef4444;
+  --cond: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --mono: 'Share Tech Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: var(--room);
+  background-image: radial-gradient(75% 60% at 50% 0%, #16191b, var(--room) 70%);
+  color: var(--label);
+  font-family: var(--mono);
+}
+
+h1, p { margin: 0; }
+
+:focus-visible { outline: 2px solid var(--phosphor); outline-offset: 3px; }
+
+.hidden { display: none !important; }
+
+/* ---- Chassis ------------------------------------------------ */
+
+.rack {
+  width: min(720px, 100%);
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  /* Brushed metal: fine vertical grain over a soft top light. */
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .014) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, var(--chassis-2), var(--chassis) 30%, #171a1c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 40px 70px -30px #000;
+}
+
+.chassis-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .9rem 1.1rem;
+  border-bottom: 1px solid var(--edge);
+  font-family: var(--cond);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.unit-id {
+  padding: .3rem .5rem;
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  color: var(--phosphor);
+  font-family: var(--mono);
+  letter-spacing: .06em;
+  text-decoration: none;
+  transition: background-color .2s ease, color .2s ease;
+}
+.unit-id:hover { background: var(--phosphor); color: var(--screen); }
+
+.unit-name { color: #cdd4d7; }
+
+.power { display: inline-flex; align-items: center; gap: .45rem; margin-left: auto; color: var(--label-dim); }
+.power i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--phosphor);
+  box-shadow: 0 0 8px var(--phosphor);
+  animation: idle 2.4s ease-in-out infinite;
+}
+@keyframes idle { 50% { opacity: .35; } }
+
+.panel { padding: clamp(1.1rem, 3vw, 1.6rem); }
+
+/* ---- Intake ------------------------------------------------- */
+
+.field-label, .readout-label {
+  display: block;
+  color: var(--label-dim);
+  font-family: var(--cond);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.input-row { display: flex; gap: .6rem; margin-top: .6rem; }
+
+#password-input {
+  flex: 1;
+  min-width: 0;
+  padding: .85rem 1rem;
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  background: var(--screen);
+  color: var(--phosphor);
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  letter-spacing: .06em;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, .7);
+}
+#password-input::placeholder { color: rgba(70, 227, 154, .28); }
+#password-input:focus { outline: none; border-color: var(--phosphor-dim); }
+
+#clear-btn {
+  padding: .5rem .9rem;
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  background: var(--chassis-2);
+  color: var(--label);
+  font-family: var(--cond);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color .18s ease, color .18s ease;
+}
+#clear-btn:hover { background: var(--edge); color: #fff; }
+
+/* ---- LED strength bar --------------------------------------- */
+
+.meter { display: flex; align-items: center; gap: .9rem; margin-top: 1rem; }
+
+.meter-track {
+  position: relative;
+  flex: 1;
+  height: 14px;
+  border: 1px solid var(--edge);
+  border-radius: 2px;
+  background: #0f1314;
+  overflow: hidden;
+}
+#strength-bar {
+  width: 0;
+  height: 100%;
+  background: var(--alarm);
+  transition: width .5s cubic-bezier(.22, 1, .36, 1), background-color .4s ease;
+}
+/* Dark ribs turn the fill into discrete LED segments. */
+.meter-track::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 7px, #0f1314 7px 10px);
+  pointer-events: none;
+}
+
+.strength-label {
+  min-width: 5.5rem;
+  font-family: var(--cond);
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.strength-label.is-idle { color: var(--label-dim); }
+.strength-label.is-tragic { color: #ef4444; }
+.strength-label.is-mediocre { color: #f59e0b; }
+.strength-label.is-tryhard { color: #22c55e; }
+
+/* ---- Readouts ----------------------------------------------- */
+
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .6rem;
+  margin-top: 1.4rem;
+}
+
+.readout {
+  padding: .8rem .9rem;
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  background: var(--screen);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, .6);
+}
+.readout-wide { grid-column: span 2; }
+
+.readout strong {
+  display: block;
+  margin-top: .5rem;
+  color: var(--phosphor);
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.25;
+  text-shadow: 0 0 14px rgba(70, 227, 154, .35);
+  word-break: break-word;
+}
+
+/* ---- Verdict ------------------------------------------------ */
+
+.verdict {
+  margin-top: .6rem;
+  padding: 1rem;
+  border: 1px solid var(--edge);
+  border-left: 3px solid var(--alarm);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .25);
+}
+#judgment-text {
+  margin-top: .55rem;
+  color: #dbe2e5;
+  font-family: var(--mono);
+  font-size: .95rem;
+  line-height: 1.55;
+}
+.pity-note { margin-top: .6rem; color: var(--label-dim); font-size: .8125rem; line-height: 1.5; }
+
+.banner {
+  margin-top: .6rem;
+  padding: .7rem .9rem;
+  border: 1px dashed var(--edge);
+  border-radius: 3px;
+  color: #f0b429;
+  font-size: .8125rem;
+  line-height: 1.5;
+}
+.shake { animation: shake .3s ease; }
+@keyframes shake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ---- Chassis foot ------------------------------------------- */
+
+.chassis-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem 1rem;
+  padding: .8rem 1.1rem;
+  border-top: 1px solid var(--edge);
+  color: var(--label-dim);
+  font-family: var(--cond);
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.chassis-foot a { color: var(--label); text-decoration: none; }
+.chassis-foot a:hover { color: var(--phosphor); }
+
+/* ---- Small screens ------------------------------------------ */
+
+@media (max-width: 620px) {
+  .unit-name { display: none; }
+  .readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .readout-wide { grid-column: span 2; }
+  .meter { flex-direction: column; align-items: stretch; gap: .5rem; }
+  .strength-label { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .power i, .shake { animation: none; }
+}

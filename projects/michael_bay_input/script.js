@@ -15,9 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let audioCtx = null;
     let soundOn = false;
 
+    // Running timecode in the bottom matte — hours:minutes:seconds:frames.
+    const timecode = document.getElementById('timecode');
+    if (timecode) {
+        const started = Date.now();
+        const pad = (n) => String(n).padStart(2, '0');
+        setInterval(() => {
+            const total = (Date.now() - started) / 1000;
+            timecode.textContent = [
+                pad(Math.floor(total / 3600)),
+                pad(Math.floor(total / 60) % 60),
+                pad(Math.floor(total) % 60),
+                pad(Math.floor((total % 1) * 24))
+            ].join(':');
+        }, 42);
+    }
+
     soundToggle.addEventListener('click', () => {
         soundOn = !soundOn;
-        soundToggle.textContent = soundOn ? '🔊 SFX: On' : '🔇 SFX: Off';
+        soundToggle.textContent = soundOn ? 'SFX: On' : 'SFX: Off';
         if (soundOn && !audioCtx) {
             const AC = window.AudioContext || window.webkitAudioContext;
             if (AC) audioCtx = new AC();

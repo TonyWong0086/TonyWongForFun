@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Visual Sabotage
         dino.classList.add('depressed');
-        instruction.style.display = 'none';
+        instruction.style.visibility = 'hidden';
 
         // 2. The Existential Speech — escalates to full burnout after 5 naps
         const pool = naps >= 5 ? burnoutQuotes : defeatistQuotes;
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             dino.classList.remove('depressed');
             bubble.style.display = 'none';
-            instruction.style.display = 'block';
+            instruction.style.visibility = 'visible';
             isDepressed = false;
         }, restTime);
     };
@@ -80,11 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Random blinking eye for the dino
+    const eye = document.getElementById('dino-eye');
     setInterval(() => {
-        const eye = document.querySelector('rect[fill="#f7f7f7"]');
-        if (eye) {
-            eye.setAttribute('fill', '#535353');
-            setTimeout(() => eye.setAttribute('fill', '#f7f7f7'), 100);
-        }
+        if (!eye) return;
+        eye.setAttribute('fill', '#535353');
+        setTimeout(() => eye.setAttribute('fill', '#ffffff'), 100);
     }, 3000);
 });

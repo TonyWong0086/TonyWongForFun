@@ -1,1 +1,50 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Helpful Editor — Passive Notepad</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Manrope:wght@600;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="style.css"></head><body><header><a href="../../index.html" class="editor-mark">HE</a><div><strong>Helpful Editor</strong><span>Autonomous tone improvement enabled</span></div><a href="../../index.html" class="exit">Close document</a></header><main id="editor-container"><aside><span class="section-label">Document</span><h1>Untitled<br>masterpiece</h1><p>Your writing assistant may quietly improve capitalization, punctuation, pacing, and personal character.</p><dl><div><dt>Status</dt><dd><i></i> Interfering</dd></div><div><dt id="word-count">0 WORDS</dt><dd id="corrections">0 HELPFUL CORRECTIONS</dd></div></dl></aside><section class="page"><div class="ruler"><span>01</span><span>Helpful Editor / Draft</span><span>Auto-save-ish</span></div><textarea id="editor" placeholder="Start typing. We’ll take it from here." spellcheck="false" autofocus></textarea><footer><span>Suggestions apply automatically</span><span>Confidence: unjustified</span></footer></section></main><div id="toast" class="toast">Feedback received. We’ve adjusted your input for tone parity.</div><script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Helpful Editor</title>
+  <meta name="description" content="A calm writing surface whose assistant quietly improves what you typed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="../../assets/theme.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <a href="../../index.html" class="editor-mark" aria-label="Close the document">HE</a>
+    <div class="doc-meta">
+      <strong>Helpful Editor</strong>
+      <span>Assistance enabled</span>
+    </div>
+    <a href="../../index.html" class="exit">Close document</a>
+  </header>
+
+  <main id="editor-container">
+    <div class="page">
+      <h1>Untitled masterpiece</h1>
+      <p class="doc-note">Your writing assistant may quietly improve capitalization, punctuation, pacing and
+        personal character.</p>
+
+      <textarea id="editor" placeholder="Start typing. We&rsquo;ll take it from here." spellcheck="false"
+        autofocus aria-label="Your document"></textarea>
+    </div>
+  </main>
+
+  <footer class="statusline">
+    <span id="word-count">0 WORDS</span>
+    <span id="corrections">0 HELPFUL CORRECTIONS</span>
+    <span class="assistant"><i aria-hidden="true"></i>Assistant is helping</span>
+  </footer>
+
+  <div id="toast" class="toast">Feedback received. We&rsquo;ve adjusted your input for tone parity.</div>
+
+  <script src="../../assets/hub.js" data-hub="../../index.html" data-no-back></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

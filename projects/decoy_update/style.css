@@ -1,3 +1,277 @@
-:root{--cloud:#e7edf2;--ink:#152231;--navy:#163b68;--blue:#2d73d5;--green:#2ca66f;--orange:#f08b3e;--line:#aebbc8;--mono:'IBM Plex Mono',monospace;--sans:'Manrope',sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--cloud);color:var(--ink);font-family:var(--sans);background-image:linear-gradient(rgba(21,34,49,.05) 1px,transparent 1px);background-size:100% 28px}header{height:68px;display:flex;align-items:center;gap:1rem;padding:0 clamp(1rem,4vw,3rem);background:#f9fbfc;border-bottom:1px solid var(--ink)}.corp-mark{display:grid;place-items:center;width:40px;height:40px;background:var(--navy);color:#fff;font:600 10px var(--mono)}header>div:nth-child(2){display:flex;flex-direction:column}header strong{font-size:.85rem}header span{font:400 8px var(--mono);text-transform:uppercase}.secure{margin-left:auto;font:600 9px var(--mono);text-transform:uppercase}.secure i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green)}main{max-width:1180px;margin:auto;padding:clamp(3rem,8vw,7rem) clamp(1rem,4vw,3rem);display:grid;grid-template-columns:1.5fr .7fr;gap:2rem}.update-card{background:#f9fbfc;border:1px solid var(--ink);box-shadow:10px 10px 0 var(--navy)}.card-top,.update-card footer{display:flex;justify-content:space-between;padding:.8rem 1rem;background:var(--navy);color:#fff;font:400 8px var(--mono);text-transform:uppercase}.update-body{padding:clamp(2rem,6vw,5rem)}.gear{float:right;display:grid;place-items:center;width:65px;height:65px;border:1px solid var(--ink);background:var(--orange);font-size:2rem;animation:spin 5s linear infinite}.eyebrow{color:var(--blue);font:600 9px var(--mono);text-transform:uppercase}h1{font-size:clamp(3rem,6vw,5.8rem);line-height:.86;letter-spacing:-.06em;margin:1rem 0 2.5rem}.status-text{height:20px;font:600 10px var(--mono);text-transform:uppercase;transition:opacity .4s}.progress-bar-container{height:18px;border:1px solid var(--ink);padding:3px;background:#d4dde4}.progress-fill{height:100%;width:0;background:var(--blue);transition:width .4s ease}.progress-meta{display:flex;justify-content:space-between;margin-top:.7rem;font:400 8px var(--mono);text-transform:uppercase}.update-card footer{background:#d5dee5;color:#596672}aside{align-self:start;padding:1.5rem;border:1px solid var(--ink);background:#fff}aside>span{font:600 8px var(--mono);color:var(--blue);text-transform:uppercase}aside h2{font-size:1.7rem;line-height:1.05}aside dl{margin:2rem 0;border-top:1px solid var(--line)}aside dl div{display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--line);font:400 8px var(--mono);text-transform:uppercase}aside dd{margin:0;font-weight:600}aside a{color:var(--ink);font:600 9px var(--mono);text-transform:uppercase}.abort-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1rem;background:rgba(21,34,49,.78);backdrop-filter:blur(8px)}.hidden{display:none!important}.abort-modal section{width:min(520px,100%);padding:2rem;background:#fff;border:1px solid var(--ink);box-shadow:10px 10px 0 var(--orange)}.abort-modal section>span{font:600 9px var(--mono);color:var(--orange);text-transform:uppercase}.abort-modal h2{font-size:2rem;line-height:1.05}.abort-modal p{color:#65717c}.abort-modal section>div{display:flex;gap:.6rem}.abort-modal a,.abort-modal button{flex:1;display:grid;place-items:center;min-height:48px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:600 8px var(--mono);text-transform:uppercase}.abort-modal button{background:var(--blue);color:#fff}@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:800px){main{display:block;padding-top:2rem}aside{margin-top:2rem}.gear{width:45px;height:45px}.progress-meta span,.update-card footer span:last-child,header span{display:none}}
-@media(prefers-reduced-motion:reduce){.gear{animation:none}}
+/* ============================================================
+   Enterprise Maintenance Console — an alibi, so it has to be
+   boring. Above the fold this impersonates an ordinary managed
+   update, in the anonymous system UI such a screen would use.
+   Below the fold the typeface changes and it tells the truth.
+   ============================================================ */
+
+:root {
+  --corp: #04549e;
+  --corp-deep: #04478a;
+  --dialog: #f0f0f0;
+  --dialog-line: #c8c8c8;
+  --ink: #16181c;
+  --system: -apple-system, 'Segoe UI', 'Segoe UI Variable Text', Roboto, system-ui, sans-serif;
+  --voice: 'Familjen Grotesk', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--corp);
+  color: #fff;
+  font-family: var(--system);
+}
+
+h1, h2, p, dd { margin: 0; }
+
+:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.hidden { display: none !important; }
+
+/* ---- The update screen ------------------------------------- */
+
+.update-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 4rem 1.5rem 5.5rem;
+  text-align: center;
+  /* A very slight vignette, the way a real full-screen installer looks. */
+  background: radial-gradient(120% 90% at 50% 40%, #0a63b4, var(--corp) 55%, var(--corp-deep) 100%);
+}
+
+/* The five-dot chase every OS installer has worn since 2015. */
+.spinner { position: relative; width: 54px; height: 54px; margin-bottom: 2.6rem; }
+.spinner span {
+  position: absolute;
+  inset: 0;
+  animation: orbit 1.8s cubic-bezier(.62, .1, .38, .9) infinite;
+}
+.spinner span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: #fff;
+}
+.spinner span:nth-child(1) { animation-delay: -.14s; }
+.spinner span:nth-child(2) { animation-delay: -.28s; }
+.spinner span:nth-child(3) { animation-delay: -.42s; }
+.spinner span:nth-child(4) { animation-delay: -.56s; }
+.spinner span:nth-child(5) { animation-delay: -.70s; }
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+
+.percent {
+  margin-top: .75rem;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  opacity: .92;
+}
+
+.progress-bar-container {
+  width: min(420px, 100%);
+  height: 4px;
+  margin-top: 1.6rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .28);
+  overflow: hidden;
+}
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: #fff;
+  transition: width .4s ease;
+}
+
+.status-text {
+  min-height: 1.4em;
+  margin-top: 1.5rem;
+  font-size: .875rem;
+  opacity: .8;
+  transition: opacity .4s ease;
+}
+
+.dont {
+  margin-top: 2.2rem;
+  font-size: .9375rem;
+  opacity: .95;
+}
+
+.update-foot {
+  position: absolute;
+  inset: auto 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .35rem 1.5rem;
+  padding-inline: 1.5rem;
+  font-size: .6875rem;
+  letter-spacing: .04em;
+  opacity: .45;
+}
+
+/* Deliberately quiet — finding it should feel like finding the trick. */
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 4.5rem;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: #fff;
+  font-size: .6875rem;
+  letter-spacing: .06em;
+  text-decoration: none;
+  opacity: .28;
+  transition: opacity .25s ease;
+}
+.scroll-hint::after { content: '\2193'; }
+.scroll-hint:hover, .scroll-hint:focus-visible { opacity: .9; }
+
+/* ---- Below the fold, a different voice --------------------- */
+
+.truth {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 6vw, 4rem);
+  background: #f4f2ef;
+  color: var(--ink);
+  font-family: var(--voice);
+}
+
+.truth-inner { max-width: 660px; margin-inline: auto; }
+
+.eyebrow {
+  color: #04549e;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.truth h2 {
+  margin-top: 1.1rem;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+.truth-lede {
+  margin-top: 1.3rem;
+  color: #55565a;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.specs { margin: 2.5rem 0 0; border-top: 1px solid #d9d5cf; }
+.specs div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .8rem 0;
+  border-bottom: 1px solid #d9d5cf;
+}
+.specs dt { color: #7c7d81; font-size: .8125rem; }
+.specs dd { font-size: .8125rem; font-weight: 600; }
+
+.return {
+  display: inline-block;
+  margin-top: 2.2rem;
+  padding: .75rem 1.2rem;
+  border-radius: 3px;
+  background: var(--ink);
+  color: #f4f2ef;
+  font-size: .875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color .2s ease;
+}
+.return:hover { background: #04549e; }
+
+/* ---- The cancellation dialog ------------------------------- */
+
+.abort-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(4, 60, 116, .55);
+}
+
+.abort-modal section {
+  width: min(440px, 100%);
+  border: 1px solid var(--dialog-line);
+  background: var(--dialog);
+  color: var(--ink);
+  box-shadow: 0 24px 60px -14px rgba(0, 0, 0, .5);
+}
+
+.dialog-title {
+  padding: .55rem .8rem;
+  border-bottom: 1px solid var(--dialog-line);
+  background: #e4e4e4;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.dialog-body { padding: 1.3rem 1.4rem; }
+.dialog-body h2 { font-size: 1.05rem; font-weight: 600; line-height: 1.35; }
+.dialog-body p { margin-top: .6rem; color: #5b5d61; font-size: .8125rem; line-height: 1.5; }
+
+.dialog-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  padding: .9rem 1.4rem 1.1rem;
+}
+.dialog-foot button, .dialog-foot a {
+  min-width: 116px;
+  padding: .5rem .9rem;
+  border: 1px solid #adadad;
+  border-radius: 2px;
+  background: #fdfdfd;
+  color: var(--ink);
+  font-family: var(--system);
+  font-size: .8125rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dialog-foot button { border-color: #04549e; background: #04549e; color: #fff; }
+.dialog-foot button:hover { background: #0464bb; }
+.dialog-foot a:hover { background: #efefef; }
+
+/* ---- Small screens ----------------------------------------- */
+
+@media (max-width: 700px) {
+  .update-foot span:last-child { display: none; }
+  .dialog-foot { flex-direction: column-reverse; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .spinner span { animation-duration: 3s; animation-timing-function: linear; }
+}
